@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Reading & Vision Pro</title>
+    <style>
+        :root { --primary: #00ffcc; --bg: #0f0f0f; --card: #1e1e1e; --text: #e0e0e0; --accent: #ffb400; --error: #ff4444; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; }
+        
+        nav { background: #000; width: 100%; padding: 10px; display: flex; justify-content: center; gap: 8px; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; }
+        nav button { padding: 10px 14px; border: none; border-radius: 8px; cursor: pointer; background: var(--card); color: white; transition: 0.2s; font-weight: 600; }
+        nav button.active { background: var(--primary); color: black; }
+
+        .container { max-width: 800px; width: 95%; padding: 20px; }
+        section { display: none; background: var(--card); padding: 25px; border-radius: 20px; margin-top: 20px; border: 1px solid #333; }
+        section.active { display: block; }
+
+        h2 { color: var(--primary); border-left: 4px solid var(--primary); padding-left: 12px; }
+        textarea, input[type="text"], input[type="number"], select { width: 100%; background: #252525; color: white; border: 1px solid #444; border-radius: 8px; padding: 12px; box-sizing: border-box; margin-bottom: 10px; }
+        
+        .flash-box { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; font-weight: 800; color: var(--primary); background: #0a0a0a; border-radius: 15px; margin: 20px 0; border: 2px solid #333; }
+        
+        .difficulty-btns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .diff-btn { background: #333; padding: 10px; border: none; color: white; border-radius: 6px; cursor: pointer; }
+        .diff-btn.selected { background: var(--accent); color: black; font-weight: bold; }
+
+        #visionArea { position: relative; height: 400px; background: #050505; border: 2px solid #222; border-radius: 15px; overflow: hidden; margin-top: 15px; }
+        .vision-target { position: absolute; font-size: 24px; color: var(--primary); font-weight: bold; transition: transform 1s linear, opacity 0.5s; }
+        .crosshair { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: red; font-size: 40px; z-index: 10; }
+
+        .btn-main { background: var(--primary); color: black; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <button onclick="App.showSection('reading')" class="nav-btn active">📖 Lezen</button>
+    <button onclick="App.showSection('numflash')" class="nav-btn">🔢 Getallen Flash</button>
+    <button onclick="App.showSection('vision')" class="nav-btn">👁️ Vision</button>
+    <button onclick="App.showSection('flash')" class="nav-btn">⚡ RSVP Flash</button>
+    <button onclick="App.showSection('mindmap')" class="nav-btn">🧠 Mind Map</button>
+    <button onclick="App.showSection('stats')" class="nav-btn">📊 Stats</button>
+</nav>
+
+<div class="container">
+    <section id="reading" class="active">
+        <h2>📖 Leestest & Import</h2>
+        <textarea id="customTextInput" placeholder="Plak hier je tekst..."></textarea>
+        <button onclick="App.loadCustomText()" class="btn-main" style="background:#555; color:white;">📥 Importeer</button>
+        <div id="readingText" style="margin-top:20px; line-height:1.6; background:#111; padding:15px; border-radius:10px;">Selecteer tekst...</div>
+        <button onclick="App.startReading()" class="btn-main" style="background:#28a745; color:white;">▶ Start Timer</button>
+        <button onclick="App.stopReading()" class="btn-main" style="background:#dc3545; color:white;">🏁 Klaar</button>
+        <h3 id="readResult" style="text-align:center;"></h3>
+    </section>
+
+    <section id="numflash">
+        <h2>🔢 Getallen Flash</h2>
+        <div class="difficulty-btns">
+            <button onclick="App.setNumDiff(1)" id="diff1" class="diff-btn selected">2-4 Cijfers</button>
+            <button onclick="App.setNumDiff(2)" id="diff2" class="diff-btn">5-7 Cijfers</button>
+            <button onclick="App.setNumDiff(3)" id="diff3" class="diff-btn">8-10 Cijfers</button>
+        </div>
+        <div id="numFlashBox" class="flash-box">---</div>
+        <div id="numInputArea" class="hidden">
+            <input type="text" id="numGuess" placeholder="Wat zag je?" style="text-align:center;">
+            <button onclick="App.checkNumGuess()" class="btn-main">Check</button>
+        </div>
+        <button id="numStartBtn" onclick="App.startNumFlash()" class="btn-main">Flits!</button>
+        <p id="numFeedback" style="text-align:center;"></p>
+    </section>
+
+    <section id="vision">
+        <h2>👁️ Vision Trainer</h2>
+        <select id="visionSpeed">
+            <option value="1000">Rustig</option>
+            <option value="600" selected>Normaal</option>
+            <option value="350">Snel</option>
+        </select>
+        <button id="visionBtn" onclick="App.startVision()" class="btn-main">Start Training</button>
+        <div id="visionArea"><div class="crosshair">+</div></div>
+    </section>
+
+    <section id="flash">
+        <h2>⚡ RSVP Flash</h2>
+        <input type="number" id="flashSpeed" value="350">
+        <div id="rsvpBox" class="flash-box">---</div>
+        <button onclick="App.startRSVP()" class="btn-main">Start</button>
+        <button onclick="App.stopRSVP()" class="btn-main" style="background:#dc3545; color:white;">Stop</button>
+    </section>
+
+    <section id="mindmap">
+        <h2>🧠 Mind Map Tips</h2>
+        <p>1. Gebruik <b>sleutelwoorden</b>.<br>2. Maak takken <b>organisch</b>.<br>3. Gebruik <b>kleuren</b>.</p>
+    </section>
+
+    <section id="stats">
+        <h2>📊 Resultaten</h2>
+        <div id="statsDisplay">Nog geen data.</div>
+    </section>
+</div>
+
+<script>
+const App = {
+    currentText: "Speed reading helpt je om informatie sneller te verwerken door je visuele spanwijdte te vergroten.",
+    numDifficulty: 1,
+    lastFlashNum: "",
+    rsvpInterval: null,
+    visionInterval: null,
+
+    init() { 
+        document.getElementById("readingText").innerText = this.currentText; 
+        this.updateStats(); 
+    },
+
+    showSection(id) {
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.currentTarget.classList.add('active');
+        this.stopAll();
+    },
+
+    stopAll() { 
+        clearInterval(this.rsvpInterval); 
+        clearInterval(this.visionInterval); 
+    },
+
+    loadCustomText() {
+        const val = document.getElementById("customTextInput").value.trim();
+        if(val.length > 5) { this.currentText = val; document.getElementById("readingText").innerText = val; }
+    },
+
+    startNumFlash() {
+        const ranges = { 1: [2, 4], 2: [5, 7], 3: [8, 10] }; // Gecorrigeerde syntax
+        const [min, max] = ranges[this.numDifficulty];
+        const len = Math.floor(Math.random()*(max-min+1))+min;
+        this.lastFlashNum = Array.from({length: len}, () => Math.floor(Math.random()*10)).join('');
+        
+        const box = document.getElementById("numFlashBox");
+        box.innerText = this.lastFlashNum;
+        document.getElementById("numStartBtn").classList.add("hidden");
+        document.getElementById("numInputArea").classList.add("hidden");
+        document.getElementById("numFeedback").innerText = "";
+        
+        setTimeout(() => {
+            box.innerText = "???";
+            document.getElementById("numInputArea").classList.remove("hidden");
+            document.getElementById("numGuess").value = "";
+            document.getElementById("numGuess").focus();
+        }, 800 + (this.numDifficulty * 200));
+    },
+
+    setNumDiff(lvl) {
+        this.numDifficulty = lvl;
+        document.querySelectorAll('.diff-btn').forEach((b, i) => b.classList.toggle('selected', i+1 === lvl));
+    },
+
+    checkNumGuess() {
+        const guess = document.getElementById("numGuess").value;
+        const correct = guess === this.lastFlashNum;
+        document.getElementById("numFeedback").innerText = correct ? "✅ Goed!" : "❌ Fout: " + this.lastFlashNum;
+        document.getElementById("numInputArea").classList.add("hidden");
+        document.getElementById("numStartBtn").classList.remove("hidden");
+        if(correct) this.saveStat("num", 1);
+    },
+
+    startVision() {
+        this.stopAll();
+        const area = document.getElementById("visionArea");
+        const speed = parseInt(document.getElementById("visionSpeed").value);
+        let count = 0;
+        this.visionInterval = setInterval(() => {
+            const s = document.createElement("span");
+            s.className = "vision-target";
+            s.innerText = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random()*26)];
+            s.style.left = (Math.random()*80+5) + "%";
+            s.style.top = (Math.random()*80+5) + "%";
+            area.appendChild(s);
+            setTimeout(() => { s.style.transform = `translate(${(Math.random()-0.5)*50}px, ${(Math.random()-0.5)*50}px)`; }, 50);
+            setTimeout(() => { s.style.opacity = "0"; setTimeout(() => s.remove(), 500); }, speed * 1.5);
+            if(count++ > 25) clearInterval(this.visionInterval);
+        }, speed);
+    },
+
+    startRSVP() {
+        const words = this.currentText.split(/\s+/);
+        let i = 0;
+        this.stopAll();
+        this.rsvpInterval = setInterval(() => {
+            if(i >= words.length) return this.stopAll();
+            document.getElementById("rsvpBox").innerText = words[i++];
+        }, 60000 / document.getElementById("flashSpeed").value);
+    },
+
+    stopRSVP() { this.stopAll(); document.getElementById("rsvpBox").innerText = "---"; },
+
+    startReading() { this.startTime = performance.now(); },
+    stopReading() {
+        if(!this.startTime) return;
+        const wpm = Math.round(this.currentText.split(" ").length / ((performance.now()-this.startTime)/60000));
+        document.getElementById("readResult").innerText = wpm + " WPM";
+        this.saveStat("wpm", wpm);
+    },
+
+    saveStat(key, val) {
+        let s = JSON.parse(localStorage.getItem("sr_v4") || '{"wpm":[], "num":0}');
+        key === "wpm" ? s.wpm.push(val) : s.num += val;
+        localStorage.setItem("sr_v4", JSON.stringify(s));
+        this.updateStats();
+    },
+
+    updateStats() {
+        const s = JSON.parse(localStorage.getItem("sr_v4") || '{"wpm":[], "num":0}');
+        const avg = s.wpm.length ? Math.round(s.wpm.reduce((a,b)=>a+b)/s.wpm.length) : 0;
+        document.getElementById("statsDisplay").innerHTML = `Gemiddelde: ${avg} WPM | Cijfers correct: ${s.num}`;
+    }
+};
+App.init();
+</script>
+</body>
+</html>
