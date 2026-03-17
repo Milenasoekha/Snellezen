@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buzan Speed Reading Pro</title>
+<style>
+:root {
+  --primary: #00ffcc; --bg: #0a0a0a; --card: #141414;
+  --card2: #1a1a1a; --text: #e0e0e0; --accent: #ffb400;
+  --red: #ff4444; --blue: #4488ff; --purple: #cc44ff;
+}
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+
+/* NAV */
+nav {
+background: #000; width: 100%; padding: 8px 6px;
+display: flex; justify-content: center; gap: 5px;
+position: sticky; top: 0; z-index: 200; flex-wrap: wrap;
+border-bottom: 1px solid #222;
+}
+nav button {
+padding: 8px 11px; border: none; border-radius: 7px; cursor: pointer;
+background: #1e1e1e; color: #bbb; transition: 0.2s; font-weight: 600; font-size: 0.8rem;
+}
+nav button.active { background: var(–primary); color: #000; }
+nav button:hover:not(.active) { background: #2a2a2a; color: white; }
+
+.container { max-width: 820px; width: 95%; padding: 16px 0 40px; }
+section { display: none; background: var(–card); padding: 22px; border-radius: 18px; margin-top: 14px; border: 1px solid #252525; }
+section.active { display: block; }
+
+h2 { color: var(–primary); border-left: 4px solid var(–primary); padding-left: 12px; margin-top: 0; font-size: 1.2rem; }
+h3 { color: var(–accent); font-size: 1rem; margin-bottom: 10px; }
+textarea, input[type=“text”], input[type=“number”], select {
+width: 100%; background: #1e1e1e; color: white; border: 1px solid #333;
+border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; font-size: 0.95rem;
+}
+textarea:focus, input:focus, select:focus { outline: none; border-color: var(–primary); }
+
+.btn { border: none; padding: 11px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.15s; font-size: 0.9rem; }
+.btn-primary { background: var(–primary); color: #000; width: 100%; margin-top: 8px; }
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-danger  { background: var(–red); color: #fff; width: 100%; margin-top: 8px; }
+.btn-neutral { background: #333; color: #fff; width: 100%; margin-top: 8px; }
+.btn-accent  { background: var(–accent); color: #000; width: 100%; margin-top: 8px; }
+.btn-row { display: flex; gap: 8px; }
+.btn-row .btn { flex: 1; }
+.hidden { display: none !important; }
+
+/* Flash box */
+.flash-box {
+min-height: 140px; display: flex; align-items: center; justify-content: center;
+font-size: 3rem; font-weight: 900; color: var(–primary);
+background: #080808; border-radius: 14px; margin: 14px 0; border: 2px solid #222;
+letter-spacing: 0.08em; transition: color 0.15s;
+}
+
+/* Difficulty buttons */
+.diff-btns { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 12px; }
+.diff-btn { background: #252525; padding: 9px 6px; border: 2px solid #333; color: #aaa; border-radius: 7px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: 0.15s; }
+.diff-btn.selected { background: #1a2a1a; border-color: var(–accent); color: var(–accent); }
+
+/* Tip / info box */
+.tip-box {
+background: #0d1f1a; border-left: 3px solid var(–primary);
+border-radius: 8px; padding: 10px 14px; font-size: 0.83rem;
+color: #8ef5e0; margin-bottom: 12px; min-height: 40px;
+}
+.tip-box b { color: var(–primary); }
+
+/* Progress bar */
+.prog-wrap { background: #333; border-radius: 4px; height: 6px; margin-bottom: 6px; overflow: hidden; }
+.prog-fill  { height: 100%; background: var(–primary); border-radius: 4px; width: 0; transition: width 0.15s; }
+
+/* Live bar */
+.live-bar {
+display: flex; align-items: center; gap: 10px;
+background: #0a0a0a; border: 1px solid #222; border-radius: 8px;
+padding: 7px 12px; margin-bottom: 10px; font-size: 0.85rem;
+}
+.live-wpm { color: var(–primary); font-weight: 900; font-size: 1.1rem; min-width: 80px; }
+
+/* Result box */
+.result-box {
+text-align: center; padding: 16px; background: #0a1f18;
+border-radius: 10px; border: 1px solid var(–primary); margin-top: 12px;
+}
+.result-box .big { font-size: 2.8rem; font-weight: 900; color: var(–primary); }
+.result-box .sub { color: #aaa; font-size: 0.85rem; margin-top: 2px; }
+.result-box .fb  { color: var(–accent); font-size: 0.95rem; font-weight: 600; margin-top: 8px; }
+
+/* ── BUZAN READING ── */
+.buzan-lvl-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.blvl-btn {
+flex: 1; min-width: 140px; padding: 10px 8px; border: 2px solid #333;
+border-radius: 10px; background: #1a1a1a; color: var(–text);
+cursor: pointer; font-weight: 700; font-size: 0.8rem; transition: 0.2s; text-align: center;
+}
+.blvl-btn .lbl { font-size: 1rem; display: block; margin-bottom: 3px; }
+.blvl-btn .desc { font-size: 0.72rem; color: #666; font-weight: 400; }
+.blvl-btn.selected { border-color: var(–primary); color: var(–primary); background: #0d2520; }
+.blvl-btn.selected .desc { color: #4ee8c5; }
+
+.speed-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.speed-row label { white-space: nowrap; font-size: 0.85rem; color: #aaa; }
+.speed-row input[type=range] { flex: 1; accent-color: var(–primary); }
+.speed-row span { min-width: 64px; text-align: right; color: var(–primary); font-weight: bold; font-size: 0.9rem; }
+
+#buzanTextDisplay {
+background: #0a0a0a; border-radius: 12px; padding: 18px 20px;
+line-height: 2.1; font-size: 1.1rem; position: relative;
+border: 1px solid #222; min-height: 70px; letter-spacing: 0.02em;
+}
+#buzanTextDisplay .word { display: inline; border-radius: 3px; padding: 1px 2px; transition: background 0.07s, color 0.07s; }
+.mode-beginner  #buzanTextDisplay .word.active { background: var(–primary); color: #000; font-weight: 900; }
+.mode-gevorderd #buzanTextDisplay .word.active { background: #33220055; color: var(–accent); font-weight: 800; outline: 1px solid var(–accent); }
+.mode-expert    #buzanTextDisplay .word.active { color: #fff; font-weight: 800; border-bottom: 3px solid var(–primary); }
+#buzanGuide {
+position: absolute; left: 0; height: 2px;
+background: linear-gradient(90deg, transparent 0%, var(–primary) 50%, transparent 100%);
+width: 100%; pointer-events: none; transition: top 0.18s ease; opacity: 0.55;
+}
+
+/* ── METRONOOM ── */
+.metro-phases { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 14px; }
+.metro-phase {
+background: #1a1a1a; border: 2px solid #333; border-radius: 8px;
+padding: 8px 4px; text-align: center; font-size: 0.75rem; color: #777;
+transition: 0.2s;
+}
+.metro-phase.active-phase { border-color: var(–accent); color: var(–accent); background: #1f1800; font-weight: 700; }
+.metro-phase.done-phase   { border-color: var(–primary); color: var(–primary); background: #0a1f18; }
+.metro-phase .ph-wpm { font-size: 1.1rem; font-weight: 900; display: block; }
+
+/* ── SCAN OEFENING ── */
+.scan-grid {
+display: grid; gap: 4px; margin: 14px 0; font-family: monospace;
+font-size: 1rem; background: #0a0a0a; padding: 14px; border-radius: 10px;
+border: 1px solid #222;
+}
+.scan-row { display: flex; gap: 8px; align-items: center; }
+.scan-target { color: var(–accent); font-weight: 900; min-width: 52px; font-size: 1.1rem; }
+.scan-num {
+padding: 3px 7px; border-radius: 4px; cursor: pointer; color: #888;
+transition: 0.1s; border: 1px solid transparent;
+}
+.scan-num:hover { background: #2a2a2a; color: white; }
+.scan-num.correct { background: #00ffcc33; color: var(–primary); border-color: var(–primary); font-weight: 700; }
+.scan-num.wrong   { background: #ff444422; color: var(–red); }
+.scan-timer { font-size: 1.8rem; font-weight: 900; color: var(–primary); text-align: center; margin: 8px 0; }
+
+/* ── CIRKEL TRAINER ── */
+#eyeCanvas { display: block; background: #060606; border-radius: 14px; border: 1px solid #222; cursor: none; width: 100%; touch-action: none; }
+.eye-pattern-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.ep-btn { flex: 1; min-width: 80px; padding: 8px 6px; background: #1e1e1e; border: 2px solid #333; color: #aaa; border-radius: 7px; cursor: pointer; font-size: 0.78rem; font-weight: 600; transition: 0.15s; }
+.ep-btn.selected { border-color: var(–blue); color: var(–blue); background: #0a1020; }
+
+/* ── PERIFEER ── */
+#periCanvas { display: block; background: #060606; border-radius: 14px; border: 1px solid #222; width: 100%; }
+.peri-input-row { display: flex; gap: 8px; margin-top: 10px; }
+.peri-input-row input { flex: 1; margin-bottom: 0; text-align: center; font-size: 1.2rem; letter-spacing: 0.1em; }
+
+/* ── PREVIEW ── */
+#previewTextDisplay {
+background: #0a0a0a; border-radius: 12px; padding: 16px 20px;
+line-height: 1.9; font-size: 1rem; min-height: 80px;
+border: 1px solid #222; overflow: hidden; position: relative;
+}
+.preview-scan-line {
+position: absolute; left: 0; right: 0; height: 28px;
+background: linear-gradient(to bottom, transparent, #00ffcc22, transparent);
+pointer-events: none; transition: top 0.08s linear;
+}
+
+/* ── VOCAB ── */
+.vocab-question { background: #0a0a0a; border-radius: 10px; padding: 16px; margin-bottom: 14px; border: 1px solid #252525; }
+.vocab-question p { font-size: 1rem; margin: 0 0 12px; color: #ddd; }
+.vocab-options { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.vocab-opt {
+padding: 9px 12px; border: 2px solid #333; border-radius: 7px;
+background: #1a1a1a; color: #bbb; cursor: pointer; font-size: 0.85rem;
+transition: 0.15s; text-align: left;
+}
+.vocab-opt:hover { border-color: #555; color: white; }
+.vocab-opt.correct { border-color: var(–primary); background: #0a1f18; color: var(–primary); font-weight: 700; }
+.vocab-opt.wrong   { border-color: var(–red); background: #1f0a0a; color: var(–red); }
+.vocab-score-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.vocab-score-bar .score { font-size: 1.2rem; font-weight: 900; color: var(–primary); }
+.vocab-difficulty-badge { font-size: 0.75rem; padding: 3px 9px; border-radius: 20px; background: #1a2a1a; color: var(–accent); border: 1px solid var(–accent); }
+
+/* ── STATS ── */
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.stat-card { background: #0f0f0f; border: 1px solid #252525; border-radius: 12px; padding: 14px; text-align: center; }
+.stat-card .sv { font-size: 2rem; font-weight: 900; color: var(–primary); }
+.stat-card .sl { font-size: 0.78rem; color: #666; margin-top: 2px; }
+.chart-wrap { margin-top: 14px; background: #0a0a0a; border-radius: 10px; padding: 12px; border: 1px solid #1a1a1a; }
+.wpm-bar-row { display: flex; align-items: flex-end; gap: 4px; height: 80px; }
+.wpm-bar { flex: 1; background: var(–primary); border-radius: 3px 3px 0 0; opacity: 0.8; min-width: 6px; }
+</style>
+
+</head>
+<body>
+<nav>
+  <button onclick="showSection('reading')"   class="nav-btn active">📖 Lezen</button>
+  <button onclick="showSection('metronoom')" class="nav-btn">🎵 Metronoom</button>
+  <button onclick="showSection('numflash')"  class="nav-btn">🔢 Getallen</button>
+  <button onclick="showSection('scan')"      class="nav-btn">🔍 Scan</button>
+  <button onclick="showSection('eye')"       class="nav-btn">👁️ Oogbeweging</button>
+  <button onclick="showSection('peripheral')"class="nav-btn">🌅 Perifeer</button>
+  <button onclick="showSection('preview')"   class="nav-btn">⚡ Preview</button>
+  <button onclick="showSection('vocab')"     class="nav-btn">📚 Vocab</button>
+  <button onclick="showSection('flash')"     class="nav-btn">⚡ RSVP</button>
+  <button onclick="showSection('stats')"     class="nav-btn">📊 Stats</button>
+</nav>
+
+<div class="container">
+
+<!-- ══ LEZEN ══════════════════════════════════════════════════════ -->
+
+<section id="reading" class="active">
+  <h2>📖 Buzan Begeleid Lezen</h2>
+  <textarea id="customTextInput" rows="3" placeholder="Plak hier je eigen tekst..."></textarea>
+  <button onclick="App.loadCustomText()" class="btn btn-neutral">📥 Importeer tekst</button>
+
+  <h3 style="margin-top:16px;">Niveau</h3>
+  <div class="buzan-lvl-row">
+    <button class="blvl-btn selected" id="blvl1" onclick="App.setBuzanLevel(1)">
+      <span class="lbl">🐢 Beginner</span>
+      <span class="desc">Woord voor woord · vinger als geleider</span>
+    </button>
+    <button class="blvl-btn" id="blvl2" onclick="App.setBuzanLevel(2)">
+      <span class="lbl">🦊 Gevorderd</span>
+      <span class="desc">2–3 woorden · blikveld verbreden</span>
+    </button>
+    <button class="blvl-btn" id="blvl3" onclick="App.setBuzanLevel(3)">
+      <span class="lbl">🦅 Expert</span>
+      <span class="desc">4–6 woorden · perifeer zien</span>
+    </button>
+  </div>
+
+  <div class="speed-row">
+    <label>Tempo:</label>
+    <input type="range" id="buzanSpeedSlider" min="60" max="800" value="200" oninput="App.onBuzanSpeedChange()">
+    <span id="buzanSpeedLabel">200 WPM</span>
+  </div>
+
+  <div class="tip-box" id="buzanTip">Kies een niveau en druk op <b>Start</b>.</div>
+
+  <div class="live-bar">
+    <span style="color:#666; font-size:0.8rem;">Voortgang</span>
+    <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="buzanProgress"></div></div>
+    <span class="live-wpm" id="buzanLiveWPM">– WPM</span>
+  </div>
+
+  <div id="buzanTextDisplay" class="mode-beginner">
+    <div id="buzanGuide"></div>
+    <span style="color:#444; font-style:italic;">Importeer tekst of gebruik de standaard tekst, dan Start.</span>
+  </div>
+
+  <div id="buzanResult" class="result-box hidden">
+    <div class="big" id="buzanResultWPM">0</div>
+    <div class="sub">woorden per minuut</div>
+    <div class="fb"  id="buzanResultFeedback"></div>
+  </div>
+
+  <div class="btn-row" style="margin-top:12px;">
+    <button onclick="App.startBuzan()"  class="btn btn-primary" style="background:#28a745;">▶ Start</button>
+    <button onclick="App.pauseBuzan()"  class="btn btn-neutral">⏸ Pauze</button>
+    <button onclick="App.stopBuzan()"   class="btn btn-danger">⏹ Stop</button>
+  </div>
+</section>
+
+<!-- ══ METRONOOM ═══════════════════════════════════════════════════ -->
+
+<section id="metronoom">
+  <h2>🎵 Metronoom Training</h2>
+  <div class="tip-box">
+    <b>Buzan's methode:</b> Lees hetzelfde stuk tekst 5× — elke ronde 100 WPM sneller.
+    Je hersenen wennen aan het hogere tempo. Daarna voelt je normale snelheid "traag" maar is het dubbel zo snel!
+  </div>
+
+  <textarea id="metroText" rows="4" placeholder="Plak tekst... (of gebruik standaard)"></textarea>
+
+<button onclick="Metro.loadText()" class="btn btn-neutral">📥 Importeer</button>
+
+  <div style="margin: 12px 0;">
+    <label style="color:#aaa; font-size:0.85rem;">Start-WPM:</label>
+    <div class="speed-row" style="margin-bottom:0;">
+      <input type="range" id="metroBaseWPM" min="60" max="500" value="150" oninput="Metro.updateBase()">
+      <span id="metroBaseLabel" style="color:var(--primary); font-weight:bold; min-width:64px; text-align:right;">150 WPM</span>
+    </div>
+  </div>
+
+  <div class="metro-phases" id="metroPhases">
+    <div class="metro-phase" id="mph0"><span class="ph-wpm">–</span>Fase 1</div>
+    <div class="metro-phase" id="mph1"><span class="ph-wpm">–</span>Fase 2</div>
+    <div class="metro-phase" id="mph2"><span class="ph-wpm">–</span>Fase 3</div>
+    <div class="metro-phase" id="mph3"><span class="ph-wpm">–</span>Fase 4</div>
+    <div class="metro-phase" id="mph4"><span class="ph-wpm">–</span>Fase 5</div>
+  </div>
+
+  <div id="metroFlashBox" class="flash-box">---</div>
+
+  <div class="live-bar">
+    <span style="color:#666; font-size:0.8rem">Fase</span>
+    <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="metroProgress"></div></div>
+    <span class="live-wpm" id="metroLiveInfo">–</span>
+  </div>
+
+  <div id="metroResult" class="result-box hidden">
+    <div class="big" id="metroResultWPM">–</div>
+    <div class="sub">gemiddelde WPM na training</div>
+    <div class="fb" id="metroResultFb"></div>
+  </div>
+
+  <div class="btn-row">
+    <button onclick="Metro.start()" class="btn btn-primary" style="background:#28a745;">▶ Start Training</button>
+    <button onclick="Metro.stop()"  class="btn btn-danger">⏹ Stop</button>
+  </div>
+</section>
+
+<!-- ══ GETALLEN FLASH ══════════════════════════════════════════════ -->
+
+<section id="numflash">
+  <h2>🔢 Buzan Perceptie Training</h2>
+  <div class="tip-box"><b>Perceptie-oefening 1:</b> Flits een getal zo kort dat je het nauwelijks kunt zien. Vertrouw op je ogen — je neemt meer op dan je denkt!</div>
+
+  <div class="diff-btns">
+    <button onclick="Num.setDiff(1)" id="ndiff1" class="diff-btn selected">🐢 2–4 cijfers</button>
+    <button onclick="Num.setDiff(2)" id="ndiff2" class="diff-btn">🦊 5–7 cijfers</button>
+    <button onclick="Num.setDiff(3)" id="ndiff3" class="diff-btn">🦅 8–10 cijfers</button>
+  </div>
+
+  <div style="margin-bottom:10px;">
+    <label style="color:#aaa; font-size:0.82rem;">Flitsduur:</label>
+    <div class="speed-row" style="margin-bottom:0; margin-top:4px;">
+      <input type="range" id="numFlashDuration" min="100" max="1200" value="600" oninput="Num.updateDuration()">
+      <span id="numFlashDurLabel" style="color:var(--primary); font-weight:bold; min-width:55px; text-align:right;">600ms</span>
+    </div>
+  </div>
+
+  <div id="numFlashBox" class="flash-box">---</div>
+
+  <div id="numInputArea" class="hidden">
+    <input type="text" id="numGuess" placeholder="Wat zag je?" style="text-align:center; font-size:1.4rem; letter-spacing:0.15em;">
+    <button onclick="Num.checkGuess()" class="btn btn-primary">✓ Check</button>
+  </div>
+
+<button id="numStartBtn" onclick="Num.start()" class="btn btn-accent">⚡ Flits!</button>
+
+  <div id="numFeedback" style="text-align:center; margin-top:10px; font-size:1rem; min-height:24px;"></div>
+
+  <div class="live-bar" style="margin-top:12px;">
+    <span style="color:#666; font-size:0.8rem;">Score:</span>
+    <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="numScoreBar"></div></div>
+    <span class="live-wpm" id="numScoreLabel">0/0</span>
+  </div>
+</section>
+
+<!-- ══ SCAN OEFENING ═══════════════════════════════════════════════ -->
+
+<section id="scan">
+  <h2>🔍 Scan Oefening</h2>
+  <div class="tip-box"><b>Perceptie-oefening 3 (Buzan):</b> Elk rij begint met een getal. Dat getal staat ergens in dezelfde rij. Klik het zo snel mogelijk! Traint je perifeer scannen.</div>
+
+  <div class="diff-btns">
+    <button onclick="Scan.setDiff(1)" id="sdiff1" class="diff-btn selected">🐢 2-cijferig</button>
+    <button onclick="Scan.setDiff(2)" id="sdiff2" class="diff-btn">🦊 3-cijferig</button>
+    <button onclick="Scan.setDiff(3)" id="sdiff3" class="diff-btn">🦅 4-cijferig</button>
+  </div>
+
+  <div class="scan-timer" id="scanTimer">–</div>
+  <div id="scanGrid" class="scan-grid"></div>
+  <div id="scanFeedback" style="text-align:center; font-size:0.9rem; margin: 8px 0; min-height:20px; color:#aaa;"></div>
+
+  <div class="live-bar">
+    <span style="color:#666; font-size:0.8rem;">Voortgang</span>
+    <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="scanProgress"></div></div>
+    <span class="live-wpm" id="scanScore">0/0</span>
+  </div>
+  <button onclick="Scan.start()" class="btn btn-primary">▶ Nieuwe Ronde</button>
+</section>
+
+<!-- ══ OOGBEWEGING ═════════════════════════════════════════════════ -->
+
+<section id="eye">
+  <h2>👁️ Oogbewegingstraining</h2>
+  <div class="tip-box"><b>Buzan Cirkel-experiment:</b> Volg de bewegende stip met je ogen — zonder je hoofd te bewegen. Dit traint je oogspieren voor vloeiender leesbeweging.</div>
+
+  <div class="eye-pattern-btns">
+    <button onclick="Eye.setPattern('circle')"   class="ep-btn selected" id="epCircle">⭕ Cirkel</button>
+    <button onclick="Eye.setPattern('zigzag')"   class="ep-btn" id="epZigzag">〰️ Zigzag</button>
+    <button onclick="Eye.setPattern('sweep')"    class="ep-btn" id="epSweep">↔️ Sweep</button>
+    <button onclick="Eye.setPattern('swave')"    class="ep-btn" id="epSwave">〜 S-golf</button>
+    <button onclick="Eye.setPattern('infinity')" class="ep-btn" id="epInfinity">∞ Infinity</button>
+  </div>
+
+  <div class="speed-row">
+    <label>Snelheid:</label>
+    <input type="range" id="eyeSpeed" min="1" max="10" value="4" oninput="Eye.setSpeed(this.value)">
+    <span id="eyeSpeedLabel" style="color:var(--primary); font-weight:bold;">Normaal</span>
+  </div>
+
+<canvas id="eyeCanvas" height="280"></canvas>
+
+  <div class="btn-row" style="margin-top:10px;">
+    <button onclick="Eye.start()" class="btn btn-primary" style="background:#28a745;">▶ Start</button>
+    <button onclick="Eye.stop()"  class="btn btn-danger">⏹ Stop</button>
+  </div>
+  <p style="color:#555; font-size:0.78rem; margin-top:10px; text-align:center;">Houd je hoofd stil. Volg alleen met je ogen.</p>
+</section>
+
+<!-- ══ PERIFEER ZICHT ══════════════════════════════════════════════ -->
+
+<section id="peripheral">
+  <h2>🌅 Perifeer Zichtveld Training</h2>
+  <div class="tip-box"><b>Buzan Mind's Eye:</b> Focus op het middelste woord. Probeer de woorden links en rechts te lezen met je perifeer zicht — zonder je ogen te bewegen!</div>
+
+  <div class="diff-btns">
+    <button onclick="Peri.setDiff(1)" id="pdiff1" class="diff-btn selected">🐢 Smal (3 woorden)</button>
+    <button onclick="Peri.setDiff(2)" id="pdiff2" class="diff-btn">🦊 Middel (5 woorden)</button>
+    <button onclick="Peri.setDiff(3)" id="pdiff3" class="diff-btn">🦅 Breed (7 woorden)</button>
+  </div>
+
+<canvas id="periCanvas" height="200"></canvas>
+
+  <div id="periFeedbackLine" style="text-align:center; margin: 8px 0; font-size:0.9rem; color:#aaa; min-height:22px;"></div>
+
+  <div class="peri-input-row">
+    <input type="text" id="periInput" placeholder="Typ de woorden die je zag (spaties ertussen)..." autocomplete="off">
+    <button onclick="Peri.check()" class="btn btn-primary" style="width:auto; margin-top:0; padding:11px 18px;">Check</button>
+  </div>
+
+  <div class="live-bar" style="margin-top:10px;">
+    <span style="color:#666; font-size:0.8rem;">Correcte woorden:</span>
+    <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="periScoreBar"></div></div>
+    <span class="live-wpm" id="periScore">0/0</span>
+  </div>
+  <button onclick="Peri.next()" class="btn btn-accent">→ Volgende</button>
+</section>
+
+<!-- ══ PREVIEW ═════════════════════════════════════════════════════ -->
+
+<section id="preview">
+  <h2>⚡ Preview Techniek</h2>
+  <div class="tip-box"><b>Buzan Preview:</b> Scan de tekst in 10 seconden om de structuur te zien. Daarna lees je de tekst normaal — en begrijp je alles veel beter doordat je hersenen al een "kaart" hebben.</div>
+
+  <textarea id="previewTextInput" rows="3" placeholder="Plak tekst om te previewer..."></textarea>
+
+<button onclick="Preview.loadText()" class="btn btn-neutral">📥 Importeer</button>
+
+  <div class="speed-row" style="margin-top:10px;">
+    <label>Preview duur:</label>
+    <input type="range" id="previewDuration" min="5" max="30" value="10" oninput="Preview.updateDur()">
+    <span id="previewDurLabel" style="color:var(--primary); font-weight:bold; min-width:50px; text-align:right;">10 sec</span>
+  </div>
+
+  <div id="previewTextDisplay">
+    <div class="preview-scan-line hidden" id="previewScanLine"></div>
+    <span style="color:#444; font-style:italic;">Importeer tekst of gebruik standaard tekst...</span>
+  </div>
+
+  <div id="previewStatus" class="tip-box" style="margin-top:10px; display:none;"></div>
+
+  <div class="btn-row" style="margin-top:10px;">
+    <button onclick="Preview.startPreview()" class="btn btn-accent">👁️ Preview scan</button>
+    <button onclick="Preview.startRead()"    class="btn btn-primary" style="background:#28a745;">📖 Lees nu</button>
+    <button onclick="Preview.stop()"         class="btn btn-danger">⏹ Stop</button>
+  </div>
+
+  <div id="previewReadResult" class="result-box hidden" style="margin-top:12px;">
+    <div class="big" id="previewWPM">–</div>
+    <div class="sub">WPM na preview</div>
+    <div class="fb" id="previewFb"></div>
+  </div>
+</section>
+
+<!-- ══ VOCAB ═══════════════════════════════════════════════════════ -->
+
+<section id="vocab">
+  <h2>📚 Vocab Mastermind</h2>
+  <div class="tip-box"><b>Buzan Vocabulaire:</b> Kennis van voorvoegsels (prefixen) en achtervoegsels (suffixen) geeft je directe toegang tot duizenden nieuwe woorden.</div>
+
+  <div class="diff-btns">
+    <button onclick="Vocab.setCategory('prefix')"  id="vcat1" class="diff-btn selected">🔤 Prefixen</button>
+    <button onclick="Vocab.setCategory('suffix')"  id="vcat2" class="diff-btn">🔠 Suffixen</button>
+    <button onclick="Vocab.setCategory('mixed')"   id="vcat3" class="diff-btn">🔀 Gemixed</button>
+  </div>
+
+  <div class="vocab-score-bar">
+    <span class="score" id="vocabScoreDisplay">0 / 0</span>
+    <span class="vocab-difficulty-badge" id="vocabStreakBadge">Reeks: 0 🔥</span>
+  </div>
+
+  <div id="vocabQuestion" class="vocab-question" style="display:none;"></div>
+  <div id="vocabFeedback" style="text-align:center; min-height:24px; font-size:0.9rem; margin-bottom:8px;"></div>
+
+  <div class="btn-row">
+    <button onclick="Vocab.start()"   class="btn btn-accent">▶ Start / Nieuw</button>
+    <button onclick="Vocab.nextQ()"   class="btn btn-neutral" id="vocabNextBtn" style="display:none;">→ Volgende</button>
+  </div>
+</section>
+
+<!-- ══ RSVP ════════════════════════════════════════════════════════ -->
+
+<section id="flash">
+  <h2>⚡ RSVP Flash Lezen</h2>
+  <div class="tip-box">Woord-voor-woord flits op één punt. Elimineert oogbewegingen volledig.</div>
+  <div class="speed-row">
+    <label>WPM:</label>
+    <input type="range" id="rsvpWPM" min="60" max="1000" value="350" oninput="RSVP.updateWPM()">
+    <span id="rsvpWPMLabel" style="color:var(--primary); font-weight:bold; min-width:70px; text-align:right;">350 WPM</span>
+  </div>
+  <div id="rsvpBox" class="flash-box">---</div>
+  <div class="btn-row">
+    <button onclick="RSVP.start()" class="btn btn-primary" style="background:#28a745;">▶ Start</button>
+    <button onclick="RSVP.stop()"  class="btn btn-danger">⏹ Stop</button>
+  </div>
+</section>
+
+<!-- ══ STATS ════════════════════════════════════════════════════════ -->
+
+<section id="stats">
+  <h2>📊 Voortgang & Resultaten</h2>
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card"><div class="sv" id="stAvgWPM">–</div><div class="sl">Gem. WPM</div></div>
+    <div class="stat-card"><div class="sv" id="stBestWPM">–</div><div class="sl">Best WPM</div></div>
+    <div class="stat-card"><div class="sv" id="stSessions">0</div><div class="sl">Sessies</div></div>
+    <div class="stat-card"><div class="sv" id="stNumScore">0</div><div class="sl">Getallen correct</div></div>
+  </div>
+  <div class="chart-wrap">
+    <div style="font-size:0.8rem; color:#555; margin-bottom:8px;">WPM per sessie (laatste 20)</div>
+    <div class="wpm-bar-row" id="wpmChart"></div>
+  </div>
+  <button onclick="App.clearStats()" class="btn btn-danger" style="margin-top:12px;">🗑️ Reset statistieken</button>
+</section>
+
+</div><!-- /container -->
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════════════════════════
+const DEFAULT_TEXT = `Speed reading helpt je om informatie sneller te verwerken door je visuele spanwijdte te vergroten. Tony Buzan ontwikkelde technieken waarbij je de ogen traint als een camera die in één oogopslag een heel zinsdeel vastlegt. Door regelmatige oefening leer je subvocalisatie te verminderen en je blikveld te verbreden. Het resultaat is een hogere leessnelheid met behoud van begrip en concentratie. De hersenen zijn relativistische organen die zich aanpassen aan nieuwe normen. Wanneer je jezelf dwingt sneller te lezen, past je brein zich aan en maakt het tempo na verloop van tijd normaal. Dit is het principe achter de metronoom-trainingsmethode die Buzan beschrijft in zijn boek The Speed Reading Book.`;
+
+const BUZAN_TIPS = {
+  1: ["🖐️ <b>Beginner:</b> Gebruik je vinger als geleider — volg elk woord fysiek.",
+      "👁️ Kijk naar je vinger, niet naar het woord. Je ogen volgen automatisch.",
+      "🔇 Probeer het woord <b>niet</b> in je hoofd uit te spreken.",
+      "📏 Houd een rustig, constant tempo aan. Regelmaat > snelheid."],
+  2: ["🦊 <b>Gevorderd:</b> Laat je ogen 'springen' van woordgroep naar woordgroep.",
+      "🔭 Focus op het <b>midden</b> van de groep — je leest perifeer mee.",
+      "⏩ Vertrouw op je hersenen. Je begrijpt meer dan je denkt bij dit tempo.",
+      "🔇 Hum zachtjes 'mmm' — dat doorbreekt de innerlijke stem."],
+  3: ["🦅 <b>Expert:</b> Scan van het begin tot het einde van de zin in één blikveld.",
+      "🌊 Denk aan een golf — ogen rollen soepel over de tekst.",
+      "🧠 Expert-lezers begrijpen bij <i>herziening</i>, niet per woord.",
+      "👀 Activeer je perifere zicht — zie de hele regel als één beeld."],
+};
+
+// Vocab database (prefix/suffix quiz)
+const VOCAB_DB = {
+  prefix: [
+    { q:"Wat betekent het voorvoegsel 'anti-'?", opts:["Tegen, tegenovergesteld","Vóór, vooruit","Samen met","Onder, beneden"], ans:0, tip:"anti-pathy = afkeer (tegen gevoel)" },
+    { q:"Wat betekent het voorvoegsel 'pre-'?", opts:["Na, achter","Vóór, eerder","Halverwege","Boven, over"], ans:1, tip:"pre-view = vooruitkijken" },
+    { q:"Wat betekent het voorvoegsel 'sub-'?", opts:["Boven","Naast","Onder, beneden","Buiten"], ans:2, tip:"sub-marine = onder de zee" },
+    { q:"Wat betekent het voorvoegsel 'trans-'?", opts:["Terug","Dwars door, over","Langs","Binnen"], ans:1, tip:"trans-atlantic = over de Atlantische Oceaan" },
+    { q:"Wat betekent het voorvoegsel 'inter-'?", opts:["Naast","Tussen, onderling","Na","Voor"], ans:1, tip:"inter-national = tussen landen" },
+    { q:"Wat betekent het voorvoegsel 'mono-'?", opts:["Twee","Drie","Veel","Eén"], ans:3, tip:"mono-logue = één spreker" },
+    { q:"Wat betekent het voorvoegsel 'bi-'?", opts:["Eén","Twee","Vier","Acht"], ans:1, tip:"bi-cycle = tweewieler" },
+    { q:"Wat betekent het voorvoegsel 'circum-'?", opts:["Binnen","Buiten","Rondom","Halverwege"], ans:2, tip:"circum-navigate = rondom navigeren" },
+    { q:"Wat betekent het voorvoegsel 'extra-'?", opts:["Buiten, voorbij","Binnen","Onder","Tegenover"], ans:0, tip:"extra-ordinary = buiten gewoon" },
+    { q:"Wat betekent het voorvoegsel 'retro-'?", opts:["Voorwaarts","Achterwaarts, terug","Omhoog","Opzij"], ans:1, tip:"retro-active = terugwerkend" },
+    { q:"Wat betekent het voorvoegsel 'omni-'?", opts:["Geen","Alles, overal","Half","Klein"], ans:1, tip:"omni-vore = alleseter" },
+    { q:"Wat betekent het voorvoegsel 'poly-'?", opts:["Eén","Geen","Veel","Weinig"], ans:2, tip:"poly-glot = iemand die veel talen spreekt" },
+    { q:"Wat betekent het voorvoegsel 'micro-'?", opts:["Klein","Groot","Snel","Oud"], ans:0, tip:"micro-scope = instrument voor kleine dingen" },
+    { q:"Wat betekent het voorvoegsel 'macro-'?", opts:["Klein","Groot, op grote schaal","Snel","Nieuw"], ans:1, tip:"macro-economics = grote economie" },
+  ],
+  suffix: [
+    { q:"Wat betekent het achtervoegsel '-logy'?", opts:["Handeling","Studie, wetenschap van","Persoon die","Eigenschap van"], ans:1, tip:"bio-logy = studie van het leven" },
+    { q:"Wat betekent het achtervoegsel '-phobia'?", opts:["Liefde voor","Angst voor","Expert in","Gebrek aan"], ans:1, tip:"claustro-phobia = angst voor nauwe ruimtes" },
+    { q:"Wat betekent het achtervoegsel '-ist'?", opts:["Wetenschap","Eigenschap","Persoon die gelooft/doet","Handeling"], ans:2, tip:"journal-ist = iemand die journalistiek bedrijft" },
+    { q:"Wat betekent het achtervoegsel '-ify'?", opts:["Toestand van","Maken, worden","Studie van","Zonder"], ans:1, tip:"simpl-ify = eenvoudig maken" },
+    { q:"Wat betekent het achtervoegsel '-ment'?", opts:["Persoon","Resultaat, staat van handeling","Wetenschap","Richting"], ans:1, tip:"achieve-ment = resultaat van bereiken" },
+    { q:"Wat betekent het achtervoegsel '-able / -ible'?", opts:["Zonder","Teveel","In staat tot, geschikt voor","Gericht op"], ans:2, tip:"read-able = geschikt om te lezen" },
+    { q:"Wat betekent het achtervoegsel '-tion / -sion'?", opts:["Persoon","Handeling, toestand","Klein","Studie"], ans:1, tip:"concentra-tion = handeling van concentreren" },
+    { q:"Wat betekent het achtervoegsel '-ous'?", opts:["Zonder","Vol van, gekenmerkt door","Richting naar","Studie"], ans:1, tip:"danger-ous = vol van gevaar" },
+    { q:"Wat betekent het achtervoegsel '-ness'?", opts:["Toestand of eigenschap","Handeling","Persoon","Richting"], ans:0, tip:"happi-ness = toestand van gelukkig zijn" },
+    { q:"Wat betekent het achtervoegsel '-graph'?", opts:["Studie van","Schrift, schrijven over","Liefde voor","Angst voor"], ans:1, tip:"photo-graph = lichtschrift" },
+    { q:"Wat betekent het achtervoegsel '-cide'?", opts:["Schepper van","Doding, doder","Studie van","Liefde voor"], ans:1, tip:"homi-cide = mensendoding" },
+    { q:"Wat betekent het achtervoegsel '-archy'?", opts:["Wetenschap","Bestuur, heerschappij","Toestand","Klein"], ans:1, tip:"mon-archy = heerschappij door één persoon" },
+  ],
+  mixed: [] // filled at runtime
+};
+VOCAB_DB.mixed = [...VOCAB_DB.prefix, ...VOCAB_DB.suffix].sort(() => Math.random()-0.5);
+
+// ═══════════════════════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════════════════════
+let _intervals = [], _timeouts = [];
+function safeSetInterval(fn, ms){ let id = setInterval(fn,ms); _intervals.push(id); return id; }
+function safeSetTimeout(fn, ms){ let id = setTimeout(fn,ms); _timeouts.push(id); return id; }
+function clearAll(){ _intervals.forEach(clearInterval); _timeouts.forEach(clearTimeout); _intervals=[]; _timeouts=[]; }
+
+function getStats(){ return JSON.parse(localStorage.getItem('bsr_v5')||'{"wpm":[],"num":0,"scan":0,"peri":0,"vocab":0}'); }
+function saveStats(s){ localStorage.setItem('bsr_v5', JSON.stringify(s)); updateStatsUI(); }
+function addWPM(wpm){ let s=getStats(); s.wpm.push(wpm); saveStats(s); }
+
+function showSection(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  clearAll();
+  Eye.animating = false;
+  if(id==='stats') updateStatsUI();
+}
+
+function updateStatsUI(){
+  const s = getStats();
+  const avg = s.wpm.length ? Math.round(s.wpm.reduce((a,b)=>a+b)/s.wpm.length) : 0;
+  const best = s.wpm.length ? Math.max(...s.wpm) : 0;
+  document.getElementById('stAvgWPM').textContent  = avg  || '–';
+  document.getElementById('stBestWPM').textContent = best || '–';
+  document.getElementById('stSessions').textContent= s.wpm.length;
+  document.getElementById('stNumScore').textContent= s.num;
+  // Chart
+  const chart = document.getElementById('wpmChart');
+  const recent = s.wpm.slice(-20);
+  const maxW = recent.length ? Math.max(...recent) : 1;
+  chart.innerHTML = recent.map(w=>`<div class="wpm-bar" style="height:${Math.round((w/maxW)*75)+5}px" title="${w} WPM"></div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  BUZAN READING
+// ═══════════════════════════════════════════════════════════════════
+const App = {
+  currentText: DEFAULT_TEXT,
+  buzanLevel: 1,
+  buzanWPM: 200,
+  buzanInterval: null,
+  buzanPaused: false,
+  buzanWordIndex: 0,
+  buzanChunks: [],
+  buzanStartTime: null,
+  buzanTipIdx: 0,
+  buzanTipInt: null,
+
+  loadCustomText(){
+    const v = document.getElementById('customTextInput').value.trim();
+    if(v.length > 5){ this.currentText = v; this.renderBuzanText(); document.getElementById('buzanResult').classList.add('hidden'); }
+  },
+  setBuzanLevel(lvl){
+    this.buzanLevel = lvl;
+    document.querySelectorAll('.blvl-btn').forEach((b,i)=>b.classList.toggle('selected', i+1===lvl));
+    const d = document.getElementById('buzanTextDisplay');
+    d.className = 'mode-'+['beginner','gevorderd','expert'][lvl-1];
+    this.renderBuzanText();
+    this._showTip();
+  },
+  onBuzanSpeedChange(){
+    this.buzanWPM = parseInt(document.getElementById('buzanSpeedSlider').value);
+    document.getElementById('buzanSpeedLabel').textContent = this.buzanWPM+' WPM';
+  },
+  _showTip(force){
+    const tips = BUZAN_TIPS[this.buzanLevel];
+    document.getElementById('buzanTip').innerHTML = tips[this.buzanTipIdx % tips.length];
+    if(!force) this.buzanTipIdx++;
+  },
+  buildChunks(text){
+    const words = text.split(/\s+/).filter(Boolean);
+    let chunks=[], i=0;
+    while(i<words.length){
+      let size = this.buzanLevel===1 ? 1 : this.buzanLevel===2 ? 2+(i%2===0?0:1) : 4+(i%3);
+      chunks.push(words.slice(i, i+size));
+      i += size;
+    }
+    return chunks;
+  },
+  renderBuzanText(){
+    const display = document.getElementById('buzanTextDisplay');
+    const chunks = this.buildChunks(this.currentText);
+    this.buzanChunks = chunks;
+    let html = '<div id="buzanGuide"></div>', widx=0;
+    chunks.forEach((chunk,ci)=>{
+      html += `<span class="chunk" data-chunk="${ci}">`;
+      chunk.forEach(w=>{ html += `<span class="word" data-word="${widx}">${w}</span> `; widx++; });
+      html += '</span>';
+    });
+    display.innerHTML = html;
+    display.className = 'mode-'+['beginner','gevorderd','expert'][this.buzanLevel-1];
+  },
+  startBuzan(){
+    if(this.buzanPaused && this.buzanInterval){ this.buzanPaused=false; this._runStep(); return; }
+    this.stopBuzan();
+    this.renderBuzanText();
+    this.buzanWordIndex = 0;
+    this.buzanStartTime = performance.now();
+    document.getElementById('buzanResult').classList.add('hidden');
+    this._showTip(true);
+    this._runStep();
+    this.buzanTipInt = setInterval(()=>this._showTip(), 8000);
+  },
+  _runStep(){
+    if(this.buzanWordIndex >= this.buzanChunks.length){ this._finish(); return; }
+    const chunk = this.buzanChunks[this.buzanWordIndex];
+    const delay = (60000/this.buzanWPM) * chunk.length;
+    this._highlightChunk(this.buzanWordIndex);
+    this._moveGuide(this.buzanWordIndex);
+    this._updateProg();
+    this.buzanWordIndex++;
+    this.buzanInterval = setTimeout(()=>{ if(!this.buzanPaused) this._runStep(); }, delay);
+  },
+  _highlightChunk(ci){
+    document.querySelectorAll('#buzanTextDisplay .word').forEach(el=>el.classList.remove('active'));
+    const el = document.querySelector(`[data-chunk="${ci}"]`);
+    if(el) el.querySelectorAll('.word').forEach(w=>w.classList.add('active'));
+  },
+  _moveGuide(ci){
+    const guide = document.getElementById('buzanGuide');
+    const el = document.querySelector(`[data-chunk="${ci}"]`);
+    if(guide && el) guide.style.top = (el.offsetTop + el.offsetHeight + 2)+'px';
+  },
+  _updateProg(){
+    const pct = (this.buzanWordIndex / Math.max(1, this.buzanChunks.length))*100;
+    document.getElementById('buzanProgress').style.width = pct+'%';
+    if(this.buzanStartTime){
+      const elapsed = (performance.now()-this.buzanStartTime)/60000;
+      const done = this.buzanChunks.slice(0,this.buzanWordIndex).flat().length;
+      document.getElementById('buzanLiveWPM').textContent = elapsed>0 ? Math.round(done/elapsed)+' WPM' : '–';
+    }
+  },
+  _finish(){
+    clearInterval(this.buzanTipInt);
+    document.querySelectorAll('#buzanTextDisplay .word').forEach(el=>el.classList.remove('active'));
+    document.getElementById('buzanProgress').style.width='100%';
+    const total = this.currentText.split(/\s+/).filter(Boolean).length;
+    const elapsed = (performance.now()-this.buzanStartTime)/60000;
+    const wpm = Math.round(total/elapsed);
+    document.getElementById('buzanResultWPM').textContent = wpm;
+    const fb = [[0,150,'🐢 Goed begin!'],[150,300,'🦊 Prima!'],[300,500,'🦅 Uitstekend!'],[500,9999,'🚀 Indrukwekkend!']].find(([lo,hi])=>wpm>=lo&&wpm<hi);
+    document.getElementById('buzanResultFeedback').textContent = fb?fb[2]:'';
+    document.getElementById('buzanResult').classList.remove('hidden');
+    addWPM(wpm);
+  },
+  pauseBuzan(){ if(this.buzanInterval){ clearTimeout(this.buzanInterval); this.buzanPaused=true; document.getElementById('buzanTip').innerHTML='⏸ <b>Gepauzeerd.</b> Druk Start om door te gaan.'; } },
+  stopBuzan(){
+    clearTimeout(this.buzanInterval); clearInterval(this.buzanTipInt);
+    this.buzanInterval=null; this.buzanPaused=false; this.buzanWordIndex=0;
+    document.getElementById('buzanProgress').style.width='0%';
+    document.getElementById('buzanLiveWPM').textContent='– WPM';
+    document.querySelectorAll('#buzanTextDisplay .word').forEach(el=>el.classList.remove('active'));
+  },
+  clearStats(){ if(confirm('Weet je zeker dat je alle statistieken wilt verwijderen?')){ localStorage.removeItem('bsr_v5'); updateStatsUI(); } }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  METRONOOM TRAINING
+// ═══════════════════════════════════════════════════════════════════
+const Metro = {
+  text: DEFAULT_TEXT,
+  baseWPM: 150,
+  words: [],
+  phase: 0,
+  wordIdx: 0,
+  running: false,
+  timer: null,
+  phases: [],
+  phaseStartTime: null,
+  totalWordsRead: 0,
+  totalTime: 0,
+
+  updateBase(){
+    this.baseWPM = parseInt(document.getElementById('metroBaseWPM').value);
+    document.getElementById('metroBaseLabel').textContent = this.baseWPM+' WPM';
+    this.updatePhaseUI();
+  },
+  updatePhaseUI(){
+    this.phases = [0,1,2,3,4].map(i=>this.baseWPM + i*100);
+    this.phases.forEach((wpm,i)=>{
+      const el = document.getElementById('mph'+i);
+      el.querySelector('.ph-wpm').textContent = wpm;
+      el.className = 'metro-phase';
+    });
+  },
+  loadText(){
+    const v = document.getElementById('metroText').value.trim();
+    if(v.length>5){ this.text=v; }
+    this.words = this.text.split(/\s+/).filter(Boolean);
+  },
+  start(){
+    this.stop();
+    if(!this.words.length) this.loadText();
+    this.phases = [0,1,2,3,4].map(i=>this.baseWPM + i*100);
+    this.phase = 0;
+    this.wordIdx = 0;
+    this.running = true;
+    this.totalWordsRead = 0;
+    this.totalTime = 0;
+    document.getElementById('metroResult').classList.add('hidden');
+    this.updatePhaseUI();
+    this._runPhase();
+  },
+  _runPhase(){
+    if(this.phase >= 5){ this._finish(); return; }
+    const wpm = this.phases[this.phase];
+    const phEl = document.getElementById('mph'+this.phase);
+    // mark phases
+    document.querySelectorAll('.metro-phase').forEach((el,i)=>{
+      el.classList.remove('active-phase','done-phase');
+      if(i < this.phase) el.classList.add('done-phase');
+      if(i === this.phase) el.classList.add('active-phase');
+    });
+    document.getElementById('metroLiveInfo').textContent = 'Fase '+(this.phase+1)+' · '+wpm+' WPM';
+    this.phaseStartTime = performance.now();
+    this._tick(wpm);
+  },
+  _tick(wpm){
+    if(!this.running) return;
+    const box = document.getElementById('metroFlashBox');
+    const ms = 60000/wpm;
+    box.textContent = this.words[this.wordIdx % this.words.length];
+    this.wordIdx++;
+    const pct = ((this.phase*100 + (this.wordIdx%50)*2) / 500)*100;
+    document.getElementById('metroProgress').style.width = Math.min(pct,100)+'%';
+    // Each phase lasts ~20 words minimum or 8 seconds
+    const phaseMs = performance.now() - this.phaseStartTime;
+    if(phaseMs >= 8000){
+      this.totalWordsRead += Math.round(phaseMs/60000 * wpm);
+      this.totalTime += phaseMs/60000;
+      this.phase++;
+      this.timer = setTimeout(()=>this._runPhase(), 400);
+    } else {
+      this.timer = setTimeout(()=>this._tick(wpm), ms);
+    }
+  },
+  _finish(){
+    this.running = false;
+    const avgWPM = this.totalTime > 0 ? Math.round(this.totalWordsRead/this.totalTime) : this.baseWPM+200;
+    document.getElementById('metroFlashBox').textContent = '✓';
+    document.getElementById('metroResult').classList.remove('hidden');
+    document.getElementById('metroResultWPM').textContent = this.phases[4];
+    document.getElementById('metroResultFb').textContent = `Je hersenen zijn nu gewend aan ${this.phases[4]} WPM. Je "normale" snelheid van ${this.baseWPM} WPM voelt nu traag!`;
+    document.querySelectorAll('.metro-phase').forEach(el=>el.classList.replace('active-phase','done-phase') || el.classList.add('done-phase'));
+    addWPM(this.phases[3]);
+  },
+  stop(){
+    this.running=false;
+    clearTimeout(this.timer);
+    document.getElementById('metroFlashBox').textContent='---';
+    document.getElementById('metroProgress').style.width='0%';
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  GETAL FLASH
+// ═══════════════════════════════════════════════════════════════════
+const Num = {
+  diff: 1, lastNum: '', flashDur: 600,
+  correct: 0, total: 0,
+
+  setDiff(d){
+    this.diff=d;
+    ['ndiff1','ndiff2','ndiff3'].forEach((id,i)=>document.getElementById(id).classList.toggle('selected',i+1===d));
+  },
+  updateDuration(){
+    this.flashDur = parseInt(document.getElementById('numFlashDuration').value);
+    document.getElementById('numFlashDurLabel').textContent = this.flashDur+'ms';
+  },
+  start(){
+    const ranges = {1:[2,4],2:[5,7],3:[8,10]};
+    const [mn,mx]=ranges[this.diff];
+    const len = Math.floor(Math.random()*(mx-mn+1))+mn;
+    this.lastNum = Array.from({length:len},()=>Math.floor(Math.random()*10)).join('');
+    const box = document.getElementById('numFlashBox');
+    box.textContent = this.lastNum;
+    box.style.color = 'var(--primary)';
+    document.getElementById('numStartBtn').classList.add('hidden');
+    document.getElementById('numInputArea').classList.add('hidden');
+    document.getElementById('numFeedback').textContent = '';
+    setTimeout(()=>{
+      box.textContent = '???';
+      document.getElementById('numInputArea').classList.remove('hidden');
+      document.getElementById('numGuess').value='';
+      document.getElementById('numGuess').focus();
+    }, this.flashDur);
+  },
+  checkGuess(){
+    const g = document.getElementById('numGuess').value.trim();
+    const ok = g===this.lastNum;
+    this.total++;
+    if(ok) this.correct++;
+    const fb = document.getElementById('numFeedback');
+    fb.textContent = ok ? '✅ Correct!' : '❌ Fout: '+this.lastNum;
+    fb.style.color = ok ? 'var(--primary)' : 'var(--red)';
+    document.getElementById('numFlashBox').textContent = ok ? '✓' : this.lastNum;
+    document.getElementById('numFlashBox').style.color = ok ? 'var(--primary)' : 'var(--red)';
+    document.getElementById('numInputArea').classList.add('hidden');
+    document.getElementById('numStartBtn').classList.remove('hidden');
+    const pct = (this.correct/this.total)*100;
+    document.getElementById('numScoreBar').style.width=pct+'%';
+    document.getElementById('numScoreLabel').textContent=this.correct+'/'+this.total;
+    if(ok){ let s=getStats(); s.num++; saveStats(s); }
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  SCAN OEFENING
+// ═══════════════════════════════════════════════════════════════════
+const Scan = {
+  diff: 1, rows: [], rowsDone: 0, totalRows: 8,
+  startTime: null, timerInt: null,
+  correct: 0, attempts: 0,
+
+  setDiff(d){
+    this.diff=d;
+    ['sdiff1','sdiff2','sdiff3'].forEach((id,i)=>document.getElementById(id).classList.toggle('selected',i+1===d));
+  },
+  _rndNum(){
+    const digits = this.diff===1?2:this.diff===2?3:4;
+    const min = Math.pow(10,digits-1), max=Math.pow(10,digits)-1;
+    return Math.floor(Math.random()*(max-min+1))+min;
+  },
+  start(){
+    clearInterval(this.timerInt);
+    this.rows=[];
+    this.rowsDone=0;
+    this.correct=0;
+    this.attempts=0;
+    // generate rows
+    for(let r=0;r<this.totalRows;r++){
+      const target = this._rndNum();
+      let nums = [target];
+      const decoys = 7;
+      while(nums.length < decoys+1){
+        const n=this._rndNum();
+        if(n!==target) nums.push(n);
+      }
+      // insert target at random position (not 0)
+      nums.splice(0,1); // remove first (target already at 0)
+      const pos = Math.floor(Math.random()*nums.length)+1;
+      nums.splice(pos,0,target);
+      this.rows.push({target, nums, done:false, pos});
+    }
+    this.startTime=performance.now();
+    this.timerInt=setInterval(()=>this._updateTimer(), 100);
+    this._renderGrid();
+    document.getElementById('scanFeedback').textContent='';
+    document.getElementById('scanProgress').style.width='0%';
+    document.getElementById('scanScore').textContent='0/'+this.totalRows;
+  },
+  _updateTimer(){
+    const s = ((performance.now()-this.startTime)/1000).toFixed(1);
+    document.getElementById('scanTimer').textContent=s+'s';
+  },
+  _renderGrid(){
+    const grid = document.getElementById('scanGrid');
+    grid.innerHTML = this.rows.map((row,ri)=>`
+      <div class="scan-row" id="srow${ri}">
+        <span class="scan-target">${row.target}</span>
+        ${row.nums.map((n,ni)=>`<span class="scan-num" onclick="Scan.click(${ri},${ni},${n})">${n}</span>`).join('')}
+      </div>`).join('');
+  },
+  click(ri, ni, val){
+    const row = this.rows[ri];
+    if(row.done) return;
+    row.done=true;
+    this.attempts++;
+    const cells = document.querySelectorAll(`#srow${ri} .scan-num`);
+    if(val===row.target){
+      this.correct++;
+      cells[ni].classList.add('correct');
+      document.getElementById('scanFeedback').textContent='✅ Correct!';
+      document.getElementById('scanFeedback').style.color='var(--primary)';
+      let s=getStats(); s.scan=(s.scan||0)+1; saveStats(s);
+    } else {
+      cells[ni].classList.add('wrong');
+      cells[row.pos-1].classList.add('correct');
+      document.getElementById('scanFeedback').textContent='❌ Fout! Het was: '+row.target;
+      document.getElementById('scanFeedback').style.color='var(--red)';
+    }
+    this.rowsDone++;
+    document.getElementById('scanProgress').style.width=(this.rowsDone/this.totalRows*100)+'%';
+    document.getElementById('scanScore').textContent=this.correct+'/'+this.totalRows;
+    if(this.rowsDone>=this.totalRows){
+      clearInterval(this.timerInt);
+      const t=((performance.now()-this.startTime)/1000).toFixed(1);
+      document.getElementById('scanFeedback').textContent=`✅ Klaar! ${this.correct}/${this.totalRows} correct in ${t}s`;
+    }
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  OOGBEWEGING TRAINER
+// ═══════════════════════════════════════════════════════════════════
+const Eye = {
+  pattern: 'circle',
+  speed: 4,
+  animating: false,
+  t: 0,
+  animId: null,
+  trail: [],
+
+  setPattern(p){
+    this.pattern=p;
+    document.querySelectorAll('.ep-btn').forEach(b=>b.classList.remove('selected'));
+    const map={circle:'epCircle',zigzag:'epZigzag',sweep:'epSweep',swave:'epSwave',infinity:'epInfinity'};
+    document.getElementById(map[p]).classList.add('selected');
+    if(this.animating) this.start();
+  },
+  setSpeed(v){
+    this.speed=parseInt(v);
+    const labels=['–','Heel langzaam','Langzaam','Rustig','Normaal','Gemiddeld','Snel','Sneller','Heel snel','Extreem','Max'];
+    document.getElementById('eyeSpeedLabel').textContent=labels[v]||v;
+  },
+  _getPos(t, w, h){
+    const cx=w/2, cy=h/2, rx=w*0.38, ry=h*0.38;
+    switch(this.pattern){
+      case 'circle':
+        return {x: cx+rx*Math.cos(t), y: cy+ry*Math.sin(t)};
+      case 'zigzag':{
+        const seg=Math.PI/4, pos=t%(seg*2);
+        const row=Math.floor(t/(seg*2));
+        const xf=pos/seg;
+        const yf=(row%2===0)?0:1;
+        return {x: w*0.08 + xf*(w*0.84), y: h*0.2 + (row%5)*(h*0.15) + (row%2===0?xf:1-xf)*(h*0.1)};
+      }
+      case 'sweep':{
+        const xp = (Math.sin(t)+1)/2;
+        const row = Math.floor(t/Math.PI)%5;
+        return {x: w*0.06+xp*(w*0.88), y: h*0.15+row*(h*0.16)};
+      }
+      case 'swave':
+        return {x: cx+(rx)*Math.sin(2*t), y: cy+(ry*0.7)*Math.sin(t)};
+      case 'infinity':
+        return {x: cx+rx*Math.cos(t)/(1+Math.sin(t)*Math.sin(t)), y: cy+rx*Math.sin(t)*Math.cos(t)/(1+Math.sin(t)*Math.sin(t))};
+    }
+  },
+  start(){
+    this.stop();
+    this.animating=true;
+    this.t=0;
+    this.trail=[];
+    const canvas=document.getElementById('eyeCanvas');
+    const W=canvas.offsetWidth; canvas.width=W;
+    const H=canvas.height;
+    const ctx=canvas.getContext('2d');
+    const spd = 0.008 * this.speed;
+    let last=performance.now();
+    const frame=(now)=>{
+      if(!this.animating) return;
+      const dt=(now-last)/16.67;
+      last=now;
+      this.t+=spd*dt;
+      const pos=this._getPos(this.t,W,H);
+      this.trail.push({...pos});
+      if(this.trail.length>40) this.trail.shift();
+      ctx.clearRect(0,0,W,H);
+      // grid lines
+      ctx.strokeStyle='#1a1a1a'; ctx.lineWidth=1;
+      for(let y=0;y<H;y+=40){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+      for(let x=0;x<W;x+=40){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+      // trail
+      this.trail.forEach((p,i)=>{
+        const a=(i/this.trail.length)*0.4;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,3*(i/this.trail.length),0,Math.PI*2);
+        ctx.fillStyle=`rgba(0,255,204,${a})`;
+        ctx.fill();
+      });
+      // dot
+      ctx.beginPath(); ctx.arc(pos.x,pos.y,10,0,Math.PI*2);
+      ctx.fillStyle='var(--primary)';
+      ctx.shadowColor='var(--primary)'; ctx.shadowBlur=18;
+      ctx.fill(); ctx.shadowBlur=0;
+      // crosshair guide
+      ctx.strokeStyle='rgba(0,255,204,0.15)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(pos.x,0); ctx.lineTo(pos.x,H); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0,pos.y); ctx.lineTo(W,pos.y); ctx.stroke();
+      this.animId=requestAnimationFrame(frame);
+    };
+    this.animId=requestAnimationFrame(frame);
+  },
+  stop(){
+    this.animating=false;
+    if(this.animId) cancelAnimationFrame(this.animId);
+    const canvas=document.getElementById('eyeCanvas');
+    if(canvas){ const ctx=canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height); }
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  PERIFEER ZICHT
+// ═══════════════════════════════════════════════════════════════════
+const Peri = {
+  diff: 1,
+  words: [],
+  currentWords: [],
+  correct: 0,
+  attempts: 0,
+
+  WORD_POOL: ['boom','zon','huis','auto','boot','vis','kat','hond','boek','pen','lamp','raam','deur','stoel','tafel','berg','rivier','zee','lucht','grond','stad','land','weg','brug','fiets','klok','brief','glas','mes','vork','lepel','ring','band','kast','bed','bad','trap','lift','park','tuin'],
+
+  setDiff(d){
+    this.diff=d;
+    ['pdiff1','pdiff2','pdiff3'].forEach((id,i)=>document.getElementById(id).classList.toggle('selected',i+1===d));
+    this.next();
+  },
+  _getCount(){ return this.diff===1?3:this.diff===2?5:7; },
+  next(){
+    const count=this._getCount();
+    const pool=[...this.WORD_POOL].sort(()=>Math.random()-0.5);
+    this.currentWords=pool.slice(0,count);
+    this._draw();
+    document.getElementById('periInput').value='';
+    document.getElementById('periFeedbackLine').textContent='Focus op het middelste woord. Typ dan alle woorden die je zag.';
+    document.getElementById('periFeedbackLine').style.color='#aaa';
+  },
+  _draw(){
+    const canvas=document.getElementById('periCanvas');
+    const W=canvas.offsetWidth; canvas.width=W;
+    const H=canvas.height;
+    const ctx=canvas.getContext('2d');
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#060606';
+    ctx.fillRect(0,0,W,H);
+    const words=this.currentWords;
+    const n=words.length;
+    const cx=W/2, cy=H/2;
+    const spacing=W/(n+1);
+    words.forEach((w,i)=>{
+      const x=spacing*(i+1);
+      const isMid=i===Math.floor(n/2);
+      ctx.font=isMid?'bold 22px Segoe UI':'16px Segoe UI';
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      // fade side words
+      const dist=Math.abs(i-Math.floor(n/2));
+      const alpha=isMid?1:Math.max(0.15, 1-(dist*0.25));
+      ctx.fillStyle=isMid?'#00ffcc':`rgba(180,180,180,${alpha})`;
+      if(isMid){
+        ctx.shadowColor='#00ffcc'; ctx.shadowBlur=12;
+      }
+      ctx.fillText(w,x,cy);
+      ctx.shadowBlur=0;
+      if(isMid){
+        // Fixation dot below
+        ctx.beginPath(); ctx.arc(x,cy+26,4,0,Math.PI*2);
+        ctx.fillStyle='var(--accent)'; ctx.fill();
+      }
+    });
+    // center guide line
+    ctx.strokeStyle='rgba(255,255,255,0.04)';
+    ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,H); ctx.stroke();
+  },
+  check(){
+    const input=document.getElementById('periInput').value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    const all=this.currentWords.map(w=>w.toLowerCase());
+    const mid=all[Math.floor(all.length/2)];
+    const side=all.filter(w=>w!==mid);
+    let found=0;
+    side.forEach(w=>{ if(input.includes(w)) found++; });
+    this.attempts++;
+    this.correct+=found;
+    const total=side.length;
+    const fb=document.getElementById('periFeedbackLine');
+    fb.textContent=`${found}/${total} randwoorden correct! Woorden waren: ${this.currentWords.join(' · ')}`;
+    fb.style.color=found===total?'var(--primary)':'var(--accent)';
+    const s=getStats(); s.peri=(s.peri||0)+found; saveStats(s);
+    const pct=this.attempts>0?(this.correct/(this.attempts*(this._getCount()-1))*100):0;
+    document.getElementById('periScoreBar').style.width=Math.min(pct,100)+'%';
+    document.getElementById('periScore').textContent=this.correct+'pt';
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  PREVIEW TECHNIEK
+// ═══════════════════════════════════════════════════════════════════
+const Preview = {
+  text: DEFAULT_TEXT,
+  previewDur: 10,
+  scanTimer: null,
+  readTimer: null,
+  readStart: null,
+  scanning: false,
+  reading: false,
+
+  loadText(){
+    const v=document.getElementById('previewTextInput').value.trim();
+    if(v.length>5){ this.text=v; }
+    this._renderText(false);
+  },
+  updateDur(){
+    this.previewDur=parseInt(document.getElementById('previewDuration').value);
+    document.getElementById('previewDurLabel').textContent=this.previewDur+' sec';
+  },
+  _renderText(highlight){
+    const d=document.getElementById('previewTextDisplay');
+    d.innerHTML=`<div class="preview-scan-line hidden" id="previewScanLine"></div>${this.text}`;
+  },
+  startPreview(){
+    this.stop();
+    this._renderText(false);
+    this.scanning=true;
+    const d=document.getElementById('previewTextDisplay');
+    const line=document.getElementById('previewScanLine');
+    line.classList.remove('hidden');
+    const H=d.scrollHeight;
+    let start=performance.now();
+    const dur=this.previewDur*1000;
+    const status=document.getElementById('previewStatus');
+    status.style.display='block';
+    const tick=()=>{
+      if(!this.scanning) return;
+      const elapsed=performance.now()-start;
+      const pct=Math.min(elapsed/dur,1);
+      line.style.top=(pct*H)+'px';
+      status.innerHTML=`👁️ <b>Preview scan:</b> ${Math.ceil((1-pct)*this.previewDur)}s resterend — scan de structuur!`;
+      if(pct<1){ this.scanTimer=requestAnimationFrame(tick); }
+      else {
+        this.scanning=false;
+        line.classList.add('hidden');
+        status.innerHTML='✅ <b>Preview klaar!</b> Druk nu op 📖 Lees nu om de tekst te lezen.';
+      }
+    };
+    this.scanTimer=requestAnimationFrame(tick);
+  },
+  startRead(){
+    this.stop();
+    this._renderText(false);
+    this.reading=true;
+    this.readStart=performance.now();
+    const status=document.getElementById('previewStatus');
+    status.style.display='block';
+    status.innerHTML='📖 <b>Lees nu!</b> Druk ⏹ Stop als je klaar bent.';
+    document.getElementById('previewReadResult').classList.add('hidden');
+  },
+  stop(){
+    this.scanning=false; this.reading=false;
+    cancelAnimationFrame(this.scanTimer);
+    const line=document.getElementById('previewScanLine');
+    if(line) line.classList.add('hidden');
+    if(this.reading && this.readStart){
+      const wpm=Math.round(this.text.split(/\s+/).filter(Boolean).length/((performance.now()-this.readStart)/60000));
+      if(wpm>0 && wpm<5000){
+        document.getElementById('previewWPM').textContent=wpm;
+        document.getElementById('previewFb').textContent=wpm>300?'🦅 Uitstekend! De preview heeft geholpen!':'🦊 Goed! Probeer het opnieuw na de preview voor een hogere score.';
+        document.getElementById('previewReadResult').classList.remove('hidden');
+        addWPM(wpm);
+      }
+    }
+    this.readStart=null;
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  VOCABULAIRE MASTERMIND
+// ═══════════════════════════════════════════════════════════════════
+const Vocab = {
+  category: 'prefix',
+  pool: [],
+  idx: 0,
+  score: 0,
+  total: 0,
+  streak: 0,
+  answered: false,
+
+  setCategory(cat){
+    this.category=cat;
+    ['vcat1','vcat2','vcat3'].forEach((id,i)=>document.getElementById(id).classList.toggle('selected',['prefix','suffix','mixed'][i]===cat));
+    this.start();
+  },
+  start(){
+    this.pool=[...VOCAB_DB[this.category]].sort(()=>Math.random()-0.5);
+    this.idx=0; this.score=0; this.total=0; this.streak=0;
+    this._updateScore();
+    this.nextQ();
+  },
+  nextQ(){
+    if(this.idx>=this.pool.length){ this.idx=0; this.pool.sort(()=>Math.random()-0.5); }
+    const q=this.pool[this.idx++];
+    this.answered=false;
+    document.getElementById('vocabFeedback').textContent='';
+    document.getElementById('vocabNextBtn').style.display='none';
+    const shuffled=[...q.opts.map((o,i)=>({o,i}))].sort(()=>Math.random()-0.5);
+    document.getElementById('vocabQuestion').style.display='block';
+    document.getElementById('vocabQuestion').innerHTML=`
+      <p>${q.q}</p>
+      <div class="vocab-options">
+        ${shuffled.map(({o,i})=>`<button class="vocab-opt" onclick="Vocab.answer(${i},${q.ans},this,'${(q.tip||'').replace(/'/g,"\\'")}')"><b>${o}</b></button>`).join('')}
+      </div>`;
+  },
+  answer(chosen, correct, btn, tip){
+    if(this.answered) return;
+    this.answered=true;
+    this.total++;
+    const ok=chosen===correct;
+    document.querySelectorAll('.vocab-opt').forEach((b,i)=>{
+      const data=parseInt(b.getAttribute('onclick').match(/Vocab\.answer\((\d+)/)[1]);
+      if(data===correct) b.classList.add('correct');
+      else if(b===btn && !ok) b.classList.add('wrong');
+    });
+    if(ok){ this.score++; this.streak++; let s=getStats(); s.vocab=(s.vocab||0)+1; saveStats(s); }
+    else { this.streak=0; }
+    const fb=document.getElementById('vocabFeedback');
+    fb.textContent=ok?`✅ Correct! ${tip||''}`:`❌ Fout! ${tip||''}`;
+    fb.style.color=ok?'var(--primary)':'var(--red)';
+    this._updateScore();
+    document.getElementById('vocabNextBtn').style.display='';
+  },
+  _updateScore(){
+    document.getElementById('vocabScoreDisplay').textContent=this.score+' / '+this.total;
+    document.getElementById('vocabStreakBadge').textContent='Reeks: '+this.streak+(this.streak>=3?' 🔥':'');
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  RSVP
+// ═══════════════════════════════════════════════════════════════════
+const RSVP = {
+  wpm: 350, timer: null,
+  updateWPM(){ this.wpm=parseInt(document.getElementById('rsvpWPM').value); document.getElementById('rsvpWPMLabel').textContent=this.wpm+' WPM'; },
+  start(){
+    this.stop();
+    const words = App.currentText.split(/\s+/).filter(Boolean);
+    let i=0;
+    this.timer=setInterval(()=>{
+      if(i>=words.length){ this.stop(); return; }
+      document.getElementById('rsvpBox').textContent=words[i++];
+    }, 60000/this.wpm);
+  },
+  stop(){ clearInterval(this.timer); document.getElementById('rsvpBox').textContent='---'; }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════════════
+App.renderBuzanText();
+Metro.updatePhaseUI();
+Scan.start();
+Peri.next();
+Preview._renderText(false);
+updateStatsUI();
+Vocab.start();
+
+// Handle enter in numGuess
+document.getElementById('numGuess').addEventListener('keydown', e=>{ if(e.key==='Enter') Num.checkGuess(); });
+document.getElementById('periInput').addEventListener('keydown', e=>{ if(e.key==='Enter') Peri.check(); });
+</script>
+
+</body>
+</html>
