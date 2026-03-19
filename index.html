@@ -425,7 +425,7 @@ padding:12px; cursor:pointer; transition:.2s; position:relative;
 }
 .today-card:hover { border-color:#333; }
 .today-card.today-done { opacity:.5; }
-.today-card.today-done::after { content:‘✓’; position:absolute; top:8px; right:10px; color:var(–primary); font-weight:900; }
+.today-card.today-done::after { content:’✓’; position:absolute; top:8px; right:10px; color:var(–primary); font-weight:900; }
 .today-card .tc-icon { font-size:1.4rem; }
 .today-card .tc-name { font-size:.82rem; font-weight:700; color:#ccc; margin-top:4px; }
 .today-card .tc-dur  { font-size:.72rem; color:#555; margin-top:2px; }
@@ -465,15 +465,15 @@ box-shadow:0 4px 24px #00ffcc22;
 
 </head>
 <body>
-<!-- ══ MILESTONE TOAST ══ -->
+<!-- &#9552;&#9552; MILESTONE TOAST &#9552;&#9552; -->
 <div id="milestoneToast"></div>
 
-<!-- ══ ONBOARDING OVERLAY ══ -->
+<!-- &#9552;&#9552; ONBOARDING OVERLAY &#9552;&#9552; -->
 
 <div id="onboardOverlay">
   <div class="ob-card">
-    <h1>🚀 Speed Reading Pro</h1>
-    <div class="ob-sub">Gebaseerd op Buzan · Levi · Ebbinghaus</div>
+    <h1>&#128640; Speed Reading Pro</h1>
+    <div class="ob-sub">Gebaseerd op Buzan &#183; Levi &#183; Ebbinghaus</div>
     <div class="ob-steps">
       <div class="ob-dot ob-active" id="obDot0"></div>
       <div class="ob-dot" id="obDot1"></div>
@@ -484,40 +484,40 @@ box-shadow:0 4px 24px #00ffcc22;
 ```
 <!-- Pagina 0: welkom -->
 <div class="ob-page ob-show" id="obPage0">
-  <span class="big-emoji">👋</span>
+  <span class="big-emoji">&#128075;</span>
   <p>Welkom! Deze app begeleidt je stap voor stap van beginner naar expert-lezer. Je begint met een korte <b>nulmeting</b> zodat de app jouw startpunt kent.</p>
   <p style="font-size:.8rem;color:#555;">Duurt ~3 minuten. Je kunt altijd opnieuw beginnen.</p>
-  <button class="ob-btn" onclick="OB.next()">Begin → </button>
+  <button class="ob-btn" onclick="OB.next()">Begin &#8594; </button>
   <button class="ob-btn-ghost" onclick="OB.skip()">Sla onboarding over</button>
 </div>
 
 <!-- Pagina 1: nulmeting -->
 <div class="ob-page" id="obPage1">
-  <p style="margin-bottom:8px;"><b style="color:var(--primary)">Stap 1 — Nulmeting</b><br>Lees onderstaande tekst zo normaal mogelijk. Druk daarna op "Klaar".</p>
+  <p style="margin-bottom:8px;"><b style="color:var(--primary)">Stap 1 &#8212; Nulmeting</b><br>Lees onderstaande tekst zo normaal mogelijk. Druk daarna op "Klaar".</p>
   <div class="ob-reading-box" id="obReadText"></div>
   <div style="display:flex;gap:8px;margin-bottom:8px;">
-    <button class="ob-btn" id="obStartReadBtn" onclick="OB.startRead()" style="flex:1;">▶ Start lezen</button>
-    <button class="ob-btn" id="obDoneReadBtn"  onclick="OB.doneRead()"  style="flex:1;display:none;background:#28a745;">🏁 Klaar</button>
+    <button class="ob-btn" id="obStartReadBtn" onclick="OB.startRead()" style="flex:1;">&#9654; Start lezen</button>
+    <button class="ob-btn" id="obDoneReadBtn"  onclick="OB.doneRead()"  style="flex:1;display:none;background:#28a745;">&#127937; Klaar</button>
   </div>
   <div id="obReadStatus" style="font-size:.8rem;color:#555;min-height:20px;"></div>
 </div>
 
 <!-- Pagina 2: resultaat + niveau -->
 <div class="ob-page" id="obPage2">
-  <p><b style="color:var(--primary)">Stap 2 — Jouw startniveau</b></p>
-  <div class="ob-wpm-display" id="obWPMResult">–</div>
+  <p><b style="color:var(--primary)">Stap 2 &#8212; Jouw startniveau</b></p>
+  <div class="ob-wpm-display" id="obWPMResult">&#8211;</div>
   <div class="ob-wpm-label">woorden per minuut</div>
   <div id="obLevelCards" class="ob-level-cards"></div>
-  <button class="ob-btn" onclick="OB.next()">Dit klopt → </button>
+  <button class="ob-btn" onclick="OB.next()">Dit klopt &#8594; </button>
 </div>
 
 <!-- Pagina 3: uitleg leerpad -->
 <div class="ob-page" id="obPage3">
-  <span class="big-emoji">🗺️</span>
-  <p><b style="color:var(--primary)">Stap 3 — Jouw leerpad</b></p>
+  <span class="big-emoji">&#128506;&#65039;</span>
+  <p><b style="color:var(--primary)">Stap 3 &#8212; Jouw leerpad</b></p>
   <p>De app opent oefeningen <b>stap voor stap</b>. Elke stap heeft een duidelijke drempel. Haal je die, dan gaat de volgende oefening open.</p>
   <p>Op het <b>Dashboard</b> zie je altijd wat vandaag te doen is. Begin elke sessie daar.</p>
-  <button class="ob-btn" onclick="OB.finish()">🚀 Naar mijn Dashboard</button>
+  <button class="ob-btn" onclick="OB.finish()">&#128640; Naar mijn Dashboard</button>
 </div>
 ```
 
@@ -525,24 +525,24 @@ box-shadow:0 4px 24px #00ffcc22;
 </div>
 
 <nav id="mainNav" style="display:none;">
-  <button onclick="showSection('dashboard')" class="nav-btn active" id="navDash">🏠 Dashboard</button>
-  <button onclick="showSection('reading')"   class="nav-btn">📖 Lezen</button>
-  <button onclick="showSection('metronoom')" class="nav-btn">🎵 Metronoom</button>
-  <button onclick="showSection('numflash')"  class="nav-btn">🔢 Getallen</button>
-  <button onclick="showSection('scan')"      class="nav-btn">🔍 Scan</button>
-  <button onclick="showSection('eye')"       class="nav-btn">👁️ Oogbeweging</button>
-  <button onclick="showSection('peripheral')"class="nav-btn">🌅 Perifeer</button>
-  <button onclick="showSection('preview')"   class="nav-btn">⚡ Preview</button>
-  <button onclick="showSection('vocab')"     class="nav-btn">📚 Vocab</button>
-  <button onclick="showSection('palace')"    class="nav-btn">🏛️ Geheugenpaleis</button>
-  <button onclick="showSection('ebbinghaus')"class="nav-btn">🔁 Herhaling</button>
-  <button onclick="showSection('flash')"     class="nav-btn">⚡ RSVP</button>
-  <button onclick="showSection('stats')"     class="nav-btn">📊 Stats</button>
+  <button onclick="showSection('dashboard')" class="nav-btn active" id="navDash">&#127968; Dashboard</button>
+  <button onclick="showSection('reading')"   class="nav-btn">&#128214; Lezen</button>
+  <button onclick="showSection('metronoom')" class="nav-btn">&#127925; Metronoom</button>
+  <button onclick="showSection('numflash')"  class="nav-btn">&#128290; Getallen</button>
+  <button onclick="showSection('scan')"      class="nav-btn">&#128269; Scan</button>
+  <button onclick="showSection('eye')"       class="nav-btn">&#128065;&#65039; Oogbeweging</button>
+  <button onclick="showSection('peripheral')"class="nav-btn">&#127749; Perifeer</button>
+  <button onclick="showSection('preview')"   class="nav-btn">&#9889; Preview</button>
+  <button onclick="showSection('vocab')"     class="nav-btn">&#128218; Vocab</button>
+  <button onclick="showSection('palace')"    class="nav-btn">&#127963;&#65039; Geheugenpaleis</button>
+  <button onclick="showSection('ebbinghaus')"class="nav-btn">&#128257; Herhaling</button>
+  <button onclick="showSection('flash')"     class="nav-btn">&#9889; RSVP</button>
+  <button onclick="showSection('stats')"     class="nav-btn">&#128202; Stats</button>
 </nav>
 
 <div class="container">
 
-<!-- ══ DASHBOARD ══════════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; DASHBOARD &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <div id="dashboard" class="active">
   <div class="dash-greeting" id="dashGreeting">Goedemorgen!</div>
@@ -551,62 +551,62 @@ box-shadow:0 4px 24px #00ffcc22;
   <!-- WPM Hero -->
 
   <div class="dash-wpm-hero">
-    <div class="dash-wpm-big" id="dashWPM">–</div>
+    <div class="dash-wpm-big" id="dashWPM">&#8211;</div>
     <div class="dash-wpm-info">
       <div class="label">Huidige leessnelheid</div>
-      <div class="sublabel" id="dashWPMCompare">–</div>
-      <div class="target" id="dashWPMTarget">–</div>
+      <div class="sublabel" id="dashWPMCompare">&#8211;</div>
+      <div class="target" id="dashWPMTarget">&#8211;</div>
     </div>
   </div>
 
   <!-- Vandaag doen -->
 
   <div class="dash-today">
-    <div class="today-title">📅 Vandaag — ~15 minuten</div>
+    <div class="today-title">&#128197; Vandaag &#8212; ~15 minuten</div>
     <div class="today-grid" id="todayGrid"></div>
   </div>
 
   <!-- Leerpad -->
 
-  <div class="lp-title" style="margin-top:20px;">🗺️ Leerpad — jouw voortgang</div>
+  <div class="lp-title" style="margin-top:20px;">&#128506;&#65039; Leerpad &#8212; jouw voortgang</div>
   <div class="lp-steps" id="lpSteps"></div>
 
 <button onclick="showSection('stats')" class="btn btn-neutral" style="margin-top:16px;">📊 Bekijk alle statistieken</button>
 
 </div>
 
-<!-- ══ LEZEN ══════════════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; LEZEN &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="reading">
   <div class="gate-banner" id="gateReading">
-    <span class="gate-icon">🔒</span>
+    <span class="gate-icon">&#128274;</span>
     <span class="gate-text">Voltooi eerst de <b>nulmeting op het Dashboard</b> zodat het leerpad weet waar je staat.</span>
     <button class="gate-go" onclick="showDash()">Naar Dashboard</button>
   </div>
   <div class="coach-bubble">
-    <span class="coach-avatar">🧑‍🏫</span>
+    <span class="coach-avatar">&#129489;&#8205;&#127979;</span>
     <div class="coach-text">
       <span class="coach-name">Buzan Coach</span>
       <b>Doel:</b> Bereik <b>200 WPM op Beginner</b> voordat je naar Gevorderd gaat. Lees dagelijks 10 minuten met de geleider. Zodra jouw WPM stabiel boven 200 is, gaat Metronoom Training automatisch open.
     </div>
   </div>
-  <h2>📖 Buzan Begeleid Lezen</h2>
+  <h2>&#128214; Buzan Begeleid Lezen</h2>
   <textarea id="customTextInput" rows="3" placeholder="Plak hier je eigen tekst..."></textarea>
-  <button onclick="App.loadCustomText()" class="btn btn-neutral">📥 Importeer tekst</button>
+  <button onclick="App.loadCustomText()" class="btn btn-neutral">&#128229; Importeer tekst</button>
 
   <h3 style="margin-top:16px;">Niveau</h3>
   <div class="buzan-lvl-row">
     <button class="blvl-btn selected" id="blvl1" onclick="App.setBuzanLevel(1)">
-      <span class="lbl">🐢 Beginner</span>
-      <span class="desc">Woord voor woord · vinger als geleider</span>
+      <span class="lbl">&#128034; Beginner</span>
+      <span class="desc">Woord voor woord &#183; vinger als geleider</span>
     </button>
     <button class="blvl-btn" id="blvl2" onclick="App.setBuzanLevel(2)">
-      <span class="lbl">🦊 Gevorderd</span>
-      <span class="desc">2–3 woorden · blikveld verbreden</span>
+      <span class="lbl">&#129418; Gevorderd</span>
+      <span class="desc">2&#8211;3 woorden &#183; blikveld verbreden</span>
     </button>
     <button class="blvl-btn" id="blvl3" onclick="App.setBuzanLevel(3)">
-      <span class="lbl">🦅 Expert</span>
-      <span class="desc">4–6 woorden · perifeer zien</span>
+      <span class="lbl">&#129413; Expert</span>
+      <span class="desc">4&#8211;6 woorden &#183; perifeer zien</span>
     </button>
   </div>
 
@@ -621,7 +621,7 @@ box-shadow:0 4px 24px #00ffcc22;
   <div class="live-bar">
     <span style="color:#666; font-size:0.8rem;">Voortgang</span>
     <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="buzanProgress"></div></div>
-    <span class="live-wpm" id="buzanLiveWPM">– WPM</span>
+    <span class="live-wpm" id="buzanLiveWPM">&#8211; WPM</span>
   </div>
 
   <div id="buzanTextDisplay" class="mode-beginner">
@@ -636,30 +636,30 @@ box-shadow:0 4px 24px #00ffcc22;
   </div>
 
   <div class="btn-row" style="margin-top:12px;">
-    <button onclick="App.startBuzan()"  class="btn btn-primary" style="background:#28a745;">▶ Start</button>
-    <button onclick="App.pauseBuzan()"  class="btn btn-neutral">⏸ Pauze</button>
-    <button onclick="App.stopBuzan()"   class="btn btn-danger">⏹ Stop</button>
+    <button onclick="App.startBuzan()"  class="btn btn-primary" style="background:#28a745;">&#9654; Start</button>
+    <button onclick="App.pauseBuzan()"  class="btn btn-neutral">&#9208; Pauze</button>
+    <button onclick="App.stopBuzan()"   class="btn btn-danger">&#9209; Stop</button>
   </div>
 </section>
 
-<!-- ══ METRONOOM ═══════════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; METRONOOM &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="metronoom">
   <div class="gate-banner" id="gateMetronoom">
-    <span class="gate-icon">🔒</span>
+    <span class="gate-icon">&#128274;</span>
     <span class="gate-text">Ontgrendeld na <b>200 WPM op Beginner-niveau</b>. Blijf oefenen bij Begeleid Lezen!</span>
     <button class="gate-go" onclick="showSection('reading')">Naar Lezen</button>
   </div>
   <div class="coach-bubble">
-    <span class="coach-avatar">🧑‍🏫</span>
+    <span class="coach-avatar">&#129489;&#8205;&#127979;</span>
     <div class="coach-text">
-      <span class="coach-name">Buzan Coach — Metronoom Training</span>
+      <span class="coach-name">Buzan Coach &#8212; Metronoom Training</span>
       <b>Doel:</b> Doorloop alle 5 fases zonder te stoppen. Herhaal dit dagelijks tot je <b>comfortabel 350+ WPM</b> haalt. Dan pas ga je verder met Oogbeweging en Perifeer Zicht.
     </div>
   </div>
-  <h2>🎵 Metronoom Training</h2>
+  <h2>&#127925; Metronoom Training</h2>
   <div class="tip-box">
-    <b>Buzan's methode:</b> Lees hetzelfde stuk tekst 5× — elke ronde 100 WPM sneller.
+    <b>Buzan's methode:</b> Lees hetzelfde stuk tekst 5&#215; &#8212; elke ronde 100 WPM sneller.
     Je hersenen wennen aan het hogere tempo. Daarna voelt je normale snelheid "traag" maar is het dubbel zo snel!
   </div>
 
@@ -676,11 +676,11 @@ box-shadow:0 4px 24px #00ffcc22;
   </div>
 
   <div class="metro-phases" id="metroPhases">
-    <div class="metro-phase" id="mph0"><span class="ph-wpm">–</span>Fase 1</div>
-    <div class="metro-phase" id="mph1"><span class="ph-wpm">–</span>Fase 2</div>
-    <div class="metro-phase" id="mph2"><span class="ph-wpm">–</span>Fase 3</div>
-    <div class="metro-phase" id="mph3"><span class="ph-wpm">–</span>Fase 4</div>
-    <div class="metro-phase" id="mph4"><span class="ph-wpm">–</span>Fase 5</div>
+    <div class="metro-phase" id="mph0"><span class="ph-wpm">&#8211;</span>Fase 1</div>
+    <div class="metro-phase" id="mph1"><span class="ph-wpm">&#8211;</span>Fase 2</div>
+    <div class="metro-phase" id="mph2"><span class="ph-wpm">&#8211;</span>Fase 3</div>
+    <div class="metro-phase" id="mph3"><span class="ph-wpm">&#8211;</span>Fase 4</div>
+    <div class="metro-phase" id="mph4"><span class="ph-wpm">&#8211;</span>Fase 5</div>
   </div>
 
   <div id="metroFlashBox" class="flash-box">---</div>
@@ -688,31 +688,31 @@ box-shadow:0 4px 24px #00ffcc22;
   <div class="live-bar">
     <span style="color:#666; font-size:0.8rem">Fase</span>
     <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="metroProgress"></div></div>
-    <span class="live-wpm" id="metroLiveInfo">–</span>
+    <span class="live-wpm" id="metroLiveInfo">&#8211;</span>
   </div>
 
   <div id="metroResult" class="result-box hidden">
-    <div class="big" id="metroResultWPM">–</div>
+    <div class="big" id="metroResultWPM">&#8211;</div>
     <div class="sub">gemiddelde WPM na training</div>
     <div class="fb" id="metroResultFb"></div>
   </div>
 
   <div class="btn-row">
-    <button onclick="Metro.start()" class="btn btn-primary" style="background:#28a745;">▶ Start Training</button>
-    <button onclick="Metro.stop()"  class="btn btn-danger">⏹ Stop</button>
+    <button onclick="Metro.start()" class="btn btn-primary" style="background:#28a745;">&#9654; Start Training</button>
+    <button onclick="Metro.stop()"  class="btn btn-danger">&#9209; Stop</button>
   </div>
 </section>
 
-<!-- ══ GETALLEN FLASH ══════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; GETALLEN FLASH &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="numflash">
-  <h2>🔢 Buzan Perceptie Training</h2>
-  <div class="tip-box"><b>Perceptie-oefening 1:</b> Flits een getal zo kort dat je het nauwelijks kunt zien. Vertrouw op je ogen — je neemt meer op dan je denkt!</div>
+  <h2>&#128290; Buzan Perceptie Training</h2>
+  <div class="tip-box"><b>Perceptie-oefening 1:</b> Flits een getal zo kort dat je het nauwelijks kunt zien. Vertrouw op je ogen &#8212; je neemt meer op dan je denkt!</div>
 
   <div class="diff-btns">
-    <button onclick="Num.setDiff(1)" id="ndiff1" class="diff-btn selected">🐢 2–4 cijfers</button>
-    <button onclick="Num.setDiff(2)" id="ndiff2" class="diff-btn">🦊 5–7 cijfers</button>
-    <button onclick="Num.setDiff(3)" id="ndiff3" class="diff-btn">🦅 8–10 cijfers</button>
+    <button onclick="Num.setDiff(1)" id="ndiff1" class="diff-btn selected">&#128034; 2&#8211;4 cijfers</button>
+    <button onclick="Num.setDiff(2)" id="ndiff2" class="diff-btn">&#129418; 5&#8211;7 cijfers</button>
+    <button onclick="Num.setDiff(3)" id="ndiff3" class="diff-btn">&#129413; 8&#8211;10 cijfers</button>
   </div>
 
   <div style="margin-bottom:10px;">
@@ -727,7 +727,7 @@ box-shadow:0 4px 24px #00ffcc22;
 
   <div id="numInputArea" class="hidden">
     <input type="text" id="numGuess" placeholder="Wat zag je?" style="text-align:center; font-size:1.4rem; letter-spacing:0.15em;">
-    <button onclick="Num.checkGuess()" class="btn btn-primary">✓ Check</button>
+    <button onclick="Num.checkGuess()" class="btn btn-primary">&#10003; Check</button>
   </div>
 
 <button id="numStartBtn" onclick="Num.start()" class="btn btn-accent">⚡ Flits!</button>
@@ -741,26 +741,26 @@ box-shadow:0 4px 24px #00ffcc22;
   </div>
 </section>
 
-<!-- ══ SCAN OEFENING ═══════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; SCAN OEFENING &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="scan">
   <div class="coach-bubble">
-    <span class="coach-avatar">🧑‍🏫</span>
+    <span class="coach-avatar">&#129489;&#8205;&#127979;</span>
     <div class="coach-text">
-      <span class="coach-name">Buzan Coach — Scannen</span>
-      <b>Doel:</b> Haal alle 8 rijen correct in onder <b>30 seconden</b>. Dit traint je hersenen om razendsnel een target te herkennen in perifeer veld — essentieel voor skimmen.
+      <span class="coach-name">Buzan Coach &#8212; Scannen</span>
+      <b>Doel:</b> Haal alle 8 rijen correct in onder <b>30 seconden</b>. Dit traint je hersenen om razendsnel een target te herkennen in perifeer veld &#8212; essentieel voor skimmen.
     </div>
   </div>
-  <h2>🔍 Scan Oefening</h2>
+  <h2>&#128269; Scan Oefening</h2>
   <div class="tip-box"><b>Perceptie-oefening 3 (Buzan):</b> Elk rij begint met een getal. Dat getal staat ergens in dezelfde rij. Klik het zo snel mogelijk! Traint je perifeer scannen.</div>
 
   <div class="diff-btns">
-    <button onclick="Scan.setDiff(1)" id="sdiff1" class="diff-btn selected">🐢 2-cijferig</button>
-    <button onclick="Scan.setDiff(2)" id="sdiff2" class="diff-btn">🦊 3-cijferig</button>
-    <button onclick="Scan.setDiff(3)" id="sdiff3" class="diff-btn">🦅 4-cijferig</button>
+    <button onclick="Scan.setDiff(1)" id="sdiff1" class="diff-btn selected">&#128034; 2-cijferig</button>
+    <button onclick="Scan.setDiff(2)" id="sdiff2" class="diff-btn">&#129418; 3-cijferig</button>
+    <button onclick="Scan.setDiff(3)" id="sdiff3" class="diff-btn">&#129413; 4-cijferig</button>
   </div>
 
-  <div class="scan-timer" id="scanTimer">–</div>
+  <div class="scan-timer" id="scanTimer">&#8211;</div>
   <div id="scanGrid" class="scan-grid"></div>
   <div id="scanFeedback" style="text-align:center; font-size:0.9rem; margin: 8px 0; min-height:20px; color:#aaa;"></div>
 
@@ -769,33 +769,33 @@ box-shadow:0 4px 24px #00ffcc22;
     <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="scanProgress"></div></div>
     <span class="live-wpm" id="scanScore">0/0</span>
   </div>
-  <button onclick="Scan.start()" class="btn btn-primary">▶ Nieuwe Ronde</button>
+  <button onclick="Scan.start()" class="btn btn-primary">&#9654; Nieuwe Ronde</button>
 </section>
 
-<!-- ══ OOGBEWEGING ═════════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; OOGBEWEGING &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="eye">
   <div class="gate-banner" id="gateEye">
-    <span class="gate-icon">🔒</span>
+    <span class="gate-icon">&#128274;</span>
     <span class="gate-text">Ontgrendeld na <b>5 metronoom-sessies</b>. Train eerst je leestempo!</span>
     <button class="gate-go" onclick="showSection('metronoom')">Naar Metronoom</button>
   </div>
   <div class="coach-bubble">
-    <span class="coach-avatar">🧑‍🏫</span>
+    <span class="coach-avatar">&#129489;&#8205;&#127979;</span>
     <div class="coach-text">
-      <span class="coach-name">Buzan Coach — Oogbewegingen</span>
+      <span class="coach-name">Buzan Coach &#8212; Oogbewegingen</span>
       <b>Doel:</b> Train de cirkel 2 min/dag. Zodra je de stip moeiteloos kunt volgen zonder je hoofd te bewegen, ga je naar de <b>Perifeer</b> oefening. Dit fundeert je blikveldexpansie.
     </div>
   </div>
-  <h2>👁️ Oogbewegingstraining</h2>
-  <div class="tip-box"><b>Buzan Cirkel-experiment:</b> Volg de bewegende stip met je ogen — zonder je hoofd te bewegen. Dit traint je oogspieren voor vloeiender leesbeweging.</div>
+  <h2>&#128065;&#65039; Oogbewegingstraining</h2>
+  <div class="tip-box"><b>Buzan Cirkel-experiment:</b> Volg de bewegende stip met je ogen &#8212; zonder je hoofd te bewegen. Dit traint je oogspieren voor vloeiender leesbeweging.</div>
 
   <div class="eye-pattern-btns">
-    <button onclick="Eye.setPattern('circle')"   class="ep-btn selected" id="epCircle">⭕ Cirkel</button>
-    <button onclick="Eye.setPattern('zigzag')"   class="ep-btn" id="epZigzag">〰️ Zigzag</button>
-    <button onclick="Eye.setPattern('sweep')"    class="ep-btn" id="epSweep">↔️ Sweep</button>
-    <button onclick="Eye.setPattern('swave')"    class="ep-btn" id="epSwave">〜 S-golf</button>
-    <button onclick="Eye.setPattern('infinity')" class="ep-btn" id="epInfinity">∞ Infinity</button>
+    <button onclick="Eye.setPattern('circle')"   class="ep-btn selected" id="epCircle">&#11093; Cirkel</button>
+    <button onclick="Eye.setPattern('zigzag')"   class="ep-btn" id="epZigzag">&#12336;&#65039; Zigzag</button>
+    <button onclick="Eye.setPattern('sweep')"    class="ep-btn" id="epSweep">&#8596;&#65039; Sweep</button>
+    <button onclick="Eye.setPattern('swave')"    class="ep-btn" id="epSwave">&#12316; S-golf</button>
+    <button onclick="Eye.setPattern('infinity')" class="ep-btn" id="epInfinity">&#8734; Infinity</button>
   </div>
 
   <div class="speed-row">
@@ -807,34 +807,34 @@ box-shadow:0 4px 24px #00ffcc22;
 <canvas id="eyeCanvas" height="280"></canvas>
 
   <div class="btn-row" style="margin-top:10px;">
-    <button onclick="Eye.start()" class="btn btn-primary" style="background:#28a745;">▶ Start</button>
-    <button onclick="Eye.stop()"  class="btn btn-danger">⏹ Stop</button>
+    <button onclick="Eye.start()" class="btn btn-primary" style="background:#28a745;">&#9654; Start</button>
+    <button onclick="Eye.stop()"  class="btn btn-danger">&#9209; Stop</button>
   </div>
   <p style="color:#555; font-size:0.78rem; margin-top:10px; text-align:center;">Houd je hoofd stil. Volg alleen met je ogen.</p>
 </section>
 
-<!-- ══ PERIFEER ZICHT ══════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; PERIFEER ZICHT &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="peripheral">
   <div class="gate-banner" id="gatePeripheral">
-    <span class="gate-icon">🔒</span>
+    <span class="gate-icon">&#128274;</span>
     <span class="gate-text">Ontgrendeld na <b>3 oogbeweging-sessies</b>.</span>
     <button class="gate-go" onclick="showSection('eye')">Naar Oogbeweging</button>
   </div>
   <div class="coach-bubble">
-    <span class="coach-avatar">🧑‍🏫</span>
+    <span class="coach-avatar">&#129489;&#8205;&#127979;</span>
     <div class="coach-text">
-      <span class="coach-name">Buzan Coach — Perifeer Zicht</span>
-      <b>Doel:</b> Haal <b>60% of hoger</b> op 5-woorden niveau. Dan vergroot je je blikveld genoeg voor expert-lezen. Perifeer zicht = 80% van je netvlies — gebruik het!
+      <span class="coach-name">Buzan Coach &#8212; Perifeer Zicht</span>
+      <b>Doel:</b> Haal <b>60% of hoger</b> op 5-woorden niveau. Dan vergroot je je blikveld genoeg voor expert-lezen. Perifeer zicht = 80% van je netvlies &#8212; gebruik het!
     </div>
   </div>
-  <h2>🌅 Perifeer Zichtveld Training</h2>
-  <div class="tip-box"><b>Buzan Mind's Eye:</b> Focus op het middelste woord. Probeer de woorden links en rechts te lezen met je perifeer zicht — zonder je ogen te bewegen!</div>
+  <h2>&#127749; Perifeer Zichtveld Training</h2>
+  <div class="tip-box"><b>Buzan Mind's Eye:</b> Focus op het middelste woord. Probeer de woorden links en rechts te lezen met je perifeer zicht &#8212; zonder je ogen te bewegen!</div>
 
   <div class="diff-btns">
-    <button onclick="Peri.setDiff(1)" id="pdiff1" class="diff-btn selected">🐢 Smal (3 woorden)</button>
-    <button onclick="Peri.setDiff(2)" id="pdiff2" class="diff-btn">🦊 Middel (5 woorden)</button>
-    <button onclick="Peri.setDiff(3)" id="pdiff3" class="diff-btn">🦅 Breed (7 woorden)</button>
+    <button onclick="Peri.setDiff(1)" id="pdiff1" class="diff-btn selected">&#128034; Smal (3 woorden)</button>
+    <button onclick="Peri.setDiff(2)" id="pdiff2" class="diff-btn">&#129418; Middel (5 woorden)</button>
+    <button onclick="Peri.setDiff(3)" id="pdiff3" class="diff-btn">&#129413; Breed (7 woorden)</button>
   </div>
 
 <canvas id="periCanvas" height="200"></canvas>
@@ -851,26 +851,26 @@ box-shadow:0 4px 24px #00ffcc22;
     <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="periScoreBar"></div></div>
     <span class="live-wpm" id="periScore">0/0</span>
   </div>
-  <button onclick="Peri.next()" class="btn btn-accent">→ Volgende</button>
+  <button onclick="Peri.next()" class="btn btn-accent">&#8594; Volgende</button>
 </section>
 
-<!-- ══ PREVIEW ═════════════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; PREVIEW &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="preview">
   <div class="gate-banner" id="gatePreview">
-    <span class="gate-icon">🔒</span>
+    <span class="gate-icon">&#128274;</span>
     <span class="gate-text">Ontgrendeld na <b>350+ WPM</b> gemiddeld. Bouw eerst je basistempo op!</span>
     <button class="gate-go" onclick="showSection('reading')">Naar Lezen</button>
   </div>
   <div class="coach-bubble">
-    <span class="coach-avatar">🧑‍🏫</span>
+    <span class="coach-avatar">&#129489;&#8205;&#127979;</span>
     <div class="coach-text">
-      <span class="coach-name">Buzan Coach — Preview Techniek</span>
-      <b>Workflow:</b> ① Preview scan (10 sec) → ② Lees normaal → ③ Vergelijk begrip. Onderzoek toont dat previewing begrip met <b>25-40%</b> verhoogt. Doe dit bij elk nieuw stuk tekst.
+      <span class="coach-name">Buzan Coach &#8212; Preview Techniek</span>
+      <b>Workflow:</b> &#9312; Preview scan (10 sec) &#8594; &#9313; Lees normaal &#8594; &#9314; Vergelijk begrip. Onderzoek toont dat previewing begrip met <b>25-40%</b> verhoogt. Doe dit bij elk nieuw stuk tekst.
     </div>
   </div>
-  <h2>⚡ Preview Techniek</h2>
-  <div class="tip-box"><b>Buzan Preview:</b> Scan de tekst in 10 seconden om de structuur te zien. Daarna lees je de tekst normaal — en begrijp je alles veel beter doordat je hersenen al een "kaart" hebben.</div>
+  <h2>&#9889; Preview Techniek</h2>
+  <div class="tip-box"><b>Buzan Preview:</b> Scan de tekst in 10 seconden om de structuur te zien. Daarna lees je de tekst normaal &#8212; en begrijp je alles veel beter doordat je hersenen al een "kaart" hebben.</div>
 
   <textarea id="previewTextInput" rows="3" placeholder="Plak tekst om te previewer..."></textarea>
 
@@ -890,86 +890,86 @@ box-shadow:0 4px 24px #00ffcc22;
   <div id="previewStatus" class="tip-box" style="margin-top:10px; display:none;"></div>
 
   <div class="btn-row" style="margin-top:10px;">
-    <button onclick="Preview.startPreview()" class="btn btn-accent">👁️ Preview scan</button>
-    <button onclick="Preview.startRead()"    class="btn btn-primary" style="background:#28a745;">📖 Lees nu</button>
-    <button onclick="Preview.stop()"         class="btn btn-danger">⏹ Stop</button>
+    <button onclick="Preview.startPreview()" class="btn btn-accent">&#128065;&#65039; Preview scan</button>
+    <button onclick="Preview.startRead()"    class="btn btn-primary" style="background:#28a745;">&#128214; Lees nu</button>
+    <button onclick="Preview.stop()"         class="btn btn-danger">&#9209; Stop</button>
   </div>
 
   <div id="previewReadResult" class="result-box hidden" style="margin-top:12px;">
-    <div class="big" id="previewWPM">–</div>
+    <div class="big" id="previewWPM">&#8211;</div>
     <div class="sub">WPM na preview</div>
     <div class="fb" id="previewFb"></div>
   </div>
 </section>
 
-<!-- ══ VOCAB ═══════════════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; VOCAB &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="vocab">
   <div class="coach-bubble">
-    <span class="coach-avatar">🧑‍🏫</span>
+    <span class="coach-avatar">&#129489;&#8205;&#127979;</span>
     <div class="coach-text">
-      <span class="coach-name">Buzan Coach — Vocabulaire</span>
-      <b>Doel:</b> Doe dagelijks <b>10 vragen</b>. Woordenschat is de sterkste voorspeller van leessnelheid — elk nieuw woord dat je herkent spaart je een fixatie. Streef naar een reeks van 7+.
+      <span class="coach-name">Buzan Coach &#8212; Vocabulaire</span>
+      <b>Doel:</b> Doe dagelijks <b>10 vragen</b>. Woordenschat is de sterkste voorspeller van leessnelheid &#8212; elk nieuw woord dat je herkent spaart je een fixatie. Streef naar een reeks van 7+.
     </div>
   </div>
-  <h2>📚 Vocab Mastermind</h2>
+  <h2>&#128218; Vocab Mastermind</h2>
   <div class="tip-box"><b>Buzan Vocabulaire:</b> Kennis van voorvoegsels (prefixen) en achtervoegsels (suffixen) geeft je directe toegang tot duizenden nieuwe woorden.</div>
 
   <div class="diff-btns">
-    <button onclick="Vocab.setCategory('prefix')"  id="vcat1" class="diff-btn selected">🔤 Prefixen</button>
-    <button onclick="Vocab.setCategory('suffix')"  id="vcat2" class="diff-btn">🔠 Suffixen</button>
-    <button onclick="Vocab.setCategory('mixed')"   id="vcat3" class="diff-btn">🔀 Gemixed</button>
+    <button onclick="Vocab.setCategory('prefix')"  id="vcat1" class="diff-btn selected">&#128292; Prefixen</button>
+    <button onclick="Vocab.setCategory('suffix')"  id="vcat2" class="diff-btn">&#128288; Suffixen</button>
+    <button onclick="Vocab.setCategory('mixed')"   id="vcat3" class="diff-btn">&#128256; Gemixed</button>
   </div>
 
   <div class="vocab-score-bar">
     <span class="score" id="vocabScoreDisplay">0 / 0</span>
-    <span class="vocab-difficulty-badge" id="vocabStreakBadge">Reeks: 0 🔥</span>
+    <span class="vocab-difficulty-badge" id="vocabStreakBadge">Reeks: 0 &#128293;</span>
   </div>
 
   <div id="vocabQuestion" class="vocab-question" style="display:none;"></div>
   <div id="vocabFeedback" style="text-align:center; min-height:24px; font-size:0.9rem; margin-bottom:8px;"></div>
 
   <div class="btn-row">
-    <button onclick="Vocab.start()"   class="btn btn-accent">▶ Start / Nieuw</button>
-    <button onclick="Vocab.nextQ()"   class="btn btn-neutral" id="vocabNextBtn" style="display:none;">→ Volgende</button>
+    <button onclick="Vocab.start()"   class="btn btn-accent">&#9654; Start / Nieuw</button>
+    <button onclick="Vocab.nextQ()"   class="btn btn-neutral" id="vocabNextBtn" style="display:none;">&#8594; Volgende</button>
   </div>
 </section>
 
-<!-- ══ GEHEUGENPALEIS ══════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; GEHEUGENPALEIS &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="palace">
   <div class="gate-banner" id="gatePalace">
-    <span class="gate-icon">🔒</span>
+    <span class="gate-icon">&#128274;</span>
     <span class="gate-text">Ontgrendeld na <b>500+ WPM</b>. Geheugenpaleis is voor gevorderde lezers die ook willen <i>onthouden</i> wat ze lezen.</span>
     <button class="gate-go" onclick="showSection('reading')">Blijf oefenen</button>
   </div>
   <div class="coach-bubble">
-    <span class="coach-avatar">🧑‍🏫</span>
+    <span class="coach-avatar">&#129489;&#8205;&#127979;</span>
     <div class="coach-text">
       <span class="coach-name">Levi & Goldentouch Coach</span>
-      <b>Volgorde:</b> Doorloop de 3 fases in volgorde. Sla fase 2 niet over — het <i>plaatsen</i> van woorden in ruimte is de kern van de methode. Herhaal wekelijks met nieuwe woorden uit je leesmateriaal.
+      <b>Volgorde:</b> Doorloop de 3 fases in volgorde. Sla fase 2 niet over &#8212; het <i>plaatsen</i> van woorden in ruimte is de kern van de methode. Herhaal wekelijks met nieuwe woorden uit je leesmateriaal.
     </div>
   </div>
-  <h2>🏛️ Geheugenpaleis + Snellezen</h2>
+  <h2>&#127963;&#65039; Geheugenpaleis + Snellezen</h2>
   <div class="tip-box">
-    <b>Levi & Goldentouch:</b> Snellezen zonder onthouden is zinloos. Koppel elk sleutelwoord aan een <b>levendige, absurde afbeelding</b> op een vaste locatie in je paleis. Je hersenen onthouden beelden 10× beter dan losse woorden.
+    <b>Levi & Goldentouch:</b> Snellezen zonder onthouden is zinloos. Koppel elk sleutelwoord aan een <b>levendige, absurde afbeelding</b> op een vaste locatie in je paleis. Je hersenen onthouden beelden 10&#215; beter dan losse woorden.
   </div>
 
   <div class="palace-phases">
-    <button class="palace-phase-btn ph-active" id="ppPhase0" onclick="Palace.setPhase(0)">① Leer woorden</button>
-    <button class="palace-phase-btn" id="ppPhase1" onclick="Palace.setPhase(1)">② Bouw paleis</button>
-    <button class="palace-phase-btn" id="ppPhase2" onclick="Palace.setPhase(2)">③ Terugroepen</button>
+    <button class="palace-phase-btn ph-active" id="ppPhase0" onclick="Palace.setPhase(0)">&#9312; Leer woorden</button>
+    <button class="palace-phase-btn" id="ppPhase1" onclick="Palace.setPhase(1)">&#9313; Bouw paleis</button>
+    <button class="palace-phase-btn" id="ppPhase2" onclick="Palace.setPhase(2)">&#9314; Terugroepen</button>
   </div>
 
   <!-- FASE 0: woorden leren met visuele haak -->
 
   <div id="palacePhase0">
-    <h3>Stap 1 — Leer de sleutelwoorden</h3>
+    <h3>Stap 1 &#8212; Leer de sleutelwoorden</h3>
     <div class="tip-box" style="font-size:0.8rem;">
-      Lees elk woord + de visuele haak. Sluit je ogen en <b>stel je de scène echt voor</b> — hoe gekker, hoe beter!
+      Lees elk woord + de visuele haak. Sluit je ogen en <b>stel je de sc&#232;ne echt voor</b> &#8212; hoe gekker, hoe beter!
     </div>
     <div id="palaceWordDisplay" class="palace-word-display">
-      <span class="palace-word-image" id="pwImage">🧠</span>
+      <span class="palace-word-image" id="pwImage">&#129504;</span>
       <span class="palace-word-big"   id="pwWord">---</span>
       <span class="palace-word-hook"  id="pwHook">Klik Start om te beginnen</span>
     </div>
@@ -979,42 +979,42 @@ box-shadow:0 4px 24px #00ffcc22;
       <span class="live-wpm" id="palaceLearnCount">0 / 0</span>
     </div>
     <div class="btn-row">
-      <button onclick="Palace.startLearn()" class="btn btn-primary" style="background:#28a745;">▶ Start</button>
-      <button onclick="Palace.nextWord()"   class="btn btn-accent"  id="palaceNextWordBtn" style="display:none;">→ Volgende</button>
+      <button onclick="Palace.startLearn()" class="btn btn-primary" style="background:#28a745;">&#9654; Start</button>
+      <button onclick="Palace.nextWord()"   class="btn btn-accent"  id="palaceNextWordBtn" style="display:none;">&#8594; Volgende</button>
     </div>
   </div>
 
   <!-- FASE 1: paleis bouwen (kamer kiezen + canvas) -->
 
   <div id="palacePhase1" class="hidden">
-    <h3>Stap 2 — Plaats woorden in je paleis</h3>
+    <h3>Stap 2 &#8212; Plaats woorden in je paleis</h3>
     <div class="tip-box" style="font-size:0.8rem;">
       Kies een kamer in je paleis en <b>klik op de canvas</b> om een woord te plaatsen. Stel je voor dat het woord letterlijk op die plek staat.
     </div>
     <div class="palace-rooms" id="palaceRooms">
-      <div class="palace-room active-room" onclick="Palace.selectRoom(0)" id="pr0"><span class="room-icon">🚪</span><span class="room-name">Voordeur</span><span class="room-count" id="rc0"></span></div>
-      <div class="palace-room" onclick="Palace.selectRoom(1)" id="pr1"><span class="room-icon">🛋️</span><span class="room-name">Woonkamer</span><span class="room-count" id="rc1"></span></div>
-      <div class="palace-room" onclick="Palace.selectRoom(2)" id="pr2"><span class="room-icon">🍳</span><span class="room-name">Keuken</span><span class="room-count" id="rc2"></span></div>
-      <div class="palace-room" onclick="Palace.selectRoom(3)" id="pr3"><span class="room-icon">🛁</span><span class="room-name">Badkamer</span><span class="room-count" id="rc3"></span></div>
-      <div class="palace-room" onclick="Palace.selectRoom(4)" id="pr4"><span class="room-icon">🛏️</span><span class="room-name">Slaapkamer</span><span class="room-count" id="rc4"></span></div>
-      <div class="palace-room" onclick="Palace.selectRoom(5)" id="pr5"><span class="room-icon">🌳</span><span class="room-name">Tuin</span><span class="room-count" id="rc5"></span></div>
+      <div class="palace-room active-room" onclick="Palace.selectRoom(0)" id="pr0"><span class="room-icon">&#128682;</span><span class="room-name">Voordeur</span><span class="room-count" id="rc0"></span></div>
+      <div class="palace-room" onclick="Palace.selectRoom(1)" id="pr1"><span class="room-icon">&#128715;&#65039;</span><span class="room-name">Woonkamer</span><span class="room-count" id="rc1"></span></div>
+      <div class="palace-room" onclick="Palace.selectRoom(2)" id="pr2"><span class="room-icon">&#127859;</span><span class="room-name">Keuken</span><span class="room-count" id="rc2"></span></div>
+      <div class="palace-room" onclick="Palace.selectRoom(3)" id="pr3"><span class="room-icon">&#128705;</span><span class="room-name">Badkamer</span><span class="room-count" id="rc3"></span></div>
+      <div class="palace-room" onclick="Palace.selectRoom(4)" id="pr4"><span class="room-icon">&#128719;&#65039;</span><span class="room-name">Slaapkamer</span><span class="room-count" id="rc4"></span></div>
+      <div class="palace-room" onclick="Palace.selectRoom(5)" id="pr5"><span class="room-icon">&#127795;</span><span class="room-name">Tuin</span><span class="room-count" id="rc5"></span></div>
     </div>
     <canvas id="palaceCanvas" height="260"></canvas>
     <p style="color:#555;font-size:.75rem;text-align:center;margin-top:6px;">Klik op de canvas om het huidige woord te plaatsen</p>
     <div id="palacePlaceStatus" class="tip-box" style="margin-top:8px;">Selecteer een kamer en klik om <b id="palaceCurrentWordLabel">...</b> te plaatsen.</div>
-    <button onclick="Palace.setPhase(2)" class="btn btn-accent" style="margin-top:10px;">→ Ga naar terugroepen</button>
+    <button onclick="Palace.setPhase(2)" class="btn btn-accent" style="margin-top:10px;">&#8594; Ga naar terugroepen</button>
   </div>
 
   <!-- FASE 2: terugroepen -->
 
   <div id="palacePhase2" class="hidden">
-    <h3>Stap 3 — Terugroepen</h3>
+    <h3>Stap 3 &#8212; Terugroepen</h3>
     <div class="tip-box" style="font-size:0.8rem;">
       Welk woord staat op deze plek in je paleis? Vertrouw op het <b>beeld</b> dat je hebt gemaakt.
     </div>
     <div id="palaceRecallDisplay" class="palace-word-display">
       <span style="font-size:.8rem;color:#555;">Kamer:</span>
-      <span id="prRoom" style="font-size:1.1rem;color:var(--accent);margin:4px 0;">–</span>
+      <span id="prRoom" style="font-size:1.1rem;color:var(--accent);margin:4px 0;">&#8211;</span>
       <span id="prImage" style="font-size:2.5rem;">?</span>
       <span id="prHook" style="font-size:.8rem;color:#556; font-style:italic;"></span>
     </div>
@@ -1032,43 +1032,43 @@ box-shadow:0 4px 24px #00ffcc22;
   <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="palaceRecallProg"></div></div>
   <span class="live-wpm" id="palaceRecallCount">0/0</span>
 </div>
-<button onclick="Palace.startRecall()" class="btn btn-primary" style="background:#28a745;">▶ Start terugroepen</button>
+<button onclick="Palace.startRecall()" class="btn btn-primary" style="background:#28a745;">&#9654; Start terugroepen</button>
 ```
 
   </div>
 </section>
 
-<!-- ══ EBBINGHAUS SPACED REPETITION ════════════════════════════════ -->
+<!-- &#9552;&#9552; EBBINGHAUS SPACED REPETITION &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="ebbinghaus">
   <div class="coach-bubble">
-    <span class="coach-avatar">🧑‍🏫</span>
+    <span class="coach-avatar">&#129489;&#8205;&#127979;</span>
     <div class="coach-text">
-      <span class="coach-name">Ebbinghaus Coach — Spaced Repetition</span>
-      <b>Routine:</b> Open deze sectie <b>elke dag</b> — het duurt maar 5 minuten. Beoordeel eerlijk. Het algoritme plant de herhaling op het optimale moment: vlak vóór je vergeet. Consistentie > intensiteit.
+      <span class="coach-name">Ebbinghaus Coach &#8212; Spaced Repetition</span>
+      <b>Routine:</b> Open deze sectie <b>elke dag</b> &#8212; het duurt maar 5 minuten. Beoordeel eerlijk. Het algoritme plant de herhaling op het optimale moment: vlak v&#243;&#243;r je vergeet. Consistentie > intensiteit.
     </div>
   </div>
-  <h2>🔁 Spaced Repetition (Ebbinghaus)</h2>
+  <h2>&#128257; Spaced Repetition (Ebbinghaus)</h2>
   <div class="tip-box">
-    <b>Ebbinghaus vergeetcurve:</b> Je vergeet 70% van wat je leest binnen 24 uur. Maar herhaling op het <i>juiste moment</i> — vlak vóór je vergeet — verankert de kennis permanent. Beoordeel zelf hoe goed je het wist; het algoritme plant de volgende herhaling.
+    <b>Ebbinghaus vergeetcurve:</b> Je vergeet 70% van wat je leest binnen 24 uur. Maar herhaling op het <i>juiste moment</i> &#8212; vlak v&#243;&#243;r je vergeet &#8212; verankert de kennis permanent. Beoordeel zelf hoe goed je het wist; het algoritme plant de volgende herhaling.
   </div>
 
   <!-- Vergeetcurve visualisatie -->
 
   <div style="margin-bottom:12px;">
-    <div style="font-size:.8rem;color:#666;margin-bottom:4px;">📉 Jouw vergeetcurve</div>
+    <div style="font-size:.8rem;color:#666;margin-bottom:4px;">&#128201; Jouw vergeetcurve</div>
     <canvas id="curveCanvas" class="curve-canvas" height="90"></canvas>
   </div>
 
   <!-- Kaart toevoegen -->
 
   <div class="sr-add-form" id="srAddForm">
-    <h4>➕ Nieuwe kaart toevoegen</h4>
-    <input  type="text" id="srFrontInput"  placeholder="Voorkant — begrip, woord of vraag...">
-    <textarea id="srBackInput"  placeholder="Achterkant — definitie, uitleg of antwoord..."></textarea>
+    <h4>&#10133; Nieuwe kaart toevoegen</h4>
+    <input  type="text" id="srFrontInput"  placeholder="Voorkant &#8212; begrip, woord of vraag...">
+    <textarea id="srBackInput"  placeholder="Achterkant &#8212; definitie, uitleg of antwoord..."></textarea>
     <div class="btn-row">
       <button onclick="SR.addCard()" class="btn btn-accent" style="margin-top:0;">Kaart toevoegen</button>
-      <button onclick="SR.addPreset()" class="btn btn-neutral" style="margin-top:0;">📚 Laad voorbeeldkaarten</button>
+      <button onclick="SR.addPreset()" class="btn btn-neutral" style="margin-top:0;">&#128218; Laad voorbeeldkaarten</button>
     </div>
   </div>
 
@@ -1084,12 +1084,12 @@ box-shadow:0 4px 24px #00ffcc22;
       <div class="sr-card-inner" id="srCardInner">
         <div class="sr-card-front">
           <span class="card-tag">VRAAG / BEGRIP</span>
-          <span id="srFrontText">–</span>
+          <span id="srFrontText">&#8211;</span>
           <span class="sr-flip-hint">Klik om te onthullen</span>
         </div>
         <div class="sr-card-back">
           <span class="card-tag">ANTWOORD / UITLEG</span>
-          <span id="srBackText">–</span>
+          <span id="srBackText">&#8211;</span>
         </div>
       </div>
     </div>
@@ -1098,10 +1098,10 @@ box-shadow:0 4px 24px #00ffcc22;
 <div id="srRatingArea" class="hidden">
   <p style="text-align:center;font-size:.8rem;color:#666;margin:6px 0;">Hoe goed wist je het?</p>
   <div class="sr-rating-row">
-    <button class="sr-rating-btn r0" onclick="SR.rate(0)">😵 Vergeten<span class="r-interval" id="rInt0">+10min</span></button>
-    <button class="sr-rating-btn r1" onclick="SR.rate(1)">😐 Moeilijk<span class="r-interval" id="rInt1">+1dag</span></button>
-    <button class="sr-rating-btn r2" onclick="SR.rate(2)">🙂 Geweten<span class="r-interval" id="rInt2">+3dagen</span></button>
-    <button class="sr-rating-btn r3" onclick="SR.rate(3)">🧠 Makkelijk<span class="r-interval" id="rInt3">+7dagen</span></button>
+    <button class="sr-rating-btn r0" onclick="SR.rate(0)">&#128565; Vergeten<span class="r-interval" id="rInt0">+10min</span></button>
+    <button class="sr-rating-btn r1" onclick="SR.rate(1)">&#128528; Moeilijk<span class="r-interval" id="rInt1">+1dag</span></button>
+    <button class="sr-rating-btn r2" onclick="SR.rate(2)">&#128578; Geweten<span class="r-interval" id="rInt2">+3dagen</span></button>
+    <button class="sr-rating-btn r3" onclick="SR.rate(3)">&#129504; Makkelijk<span class="r-interval" id="rInt3">+7dagen</span></button>
   </div>
 </div>
 ```
@@ -1113,7 +1113,7 @@ box-shadow:0 4px 24px #00ffcc22;
   </div>
 
   <div id="srDoneMsg" class="result-box hidden">
-    <div class="big">✅</div>
+    <div class="big">&#9989;</div>
     <div class="sub">Alle kaarten voor vandaag gedaan!</div>
     <div class="fb" id="srDoneFb"></div>
   </div>
@@ -1127,11 +1127,11 @@ box-shadow:0 4px 24px #00ffcc22;
   </div>
 </section>
 
-<!-- ══ RSVP ════════════════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; RSVP &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="flash">
-  <h2>⚡ RSVP Flash Lezen</h2>
-  <div class="tip-box">Woord-voor-woord flits op één punt. Elimineert oogbewegingen volledig.</div>
+  <h2>&#9889; RSVP Flash Lezen</h2>
+  <div class="tip-box">Woord-voor-woord flits op &#233;&#233;n punt. Elimineert oogbewegingen volledig.</div>
   <div class="speed-row">
     <label>WPM:</label>
     <input type="range" id="rsvpWPM" min="60" max="1000" value="350" oninput="RSVP.updateWPM()">
@@ -1139,18 +1139,18 @@ box-shadow:0 4px 24px #00ffcc22;
   </div>
   <div id="rsvpBox" class="flash-box">---</div>
   <div class="btn-row">
-    <button onclick="RSVP.start()" class="btn btn-primary" style="background:#28a745;">▶ Start</button>
-    <button onclick="RSVP.stop()"  class="btn btn-danger">⏹ Stop</button>
+    <button onclick="RSVP.start()" class="btn btn-primary" style="background:#28a745;">&#9654; Start</button>
+    <button onclick="RSVP.stop()"  class="btn btn-danger">&#9209; Stop</button>
   </div>
 </section>
 
-<!-- ══ STATS ════════════════════════════════════════════════════════ -->
+<!-- &#9552;&#9552; STATS &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
 <section id="stats">
-  <h2>📊 Voortgang & Resultaten</h2>
+  <h2>&#128202; Voortgang & Resultaten</h2>
   <div class="stats-grid" id="statsGrid">
-    <div class="stat-card"><div class="sv" id="stAvgWPM">–</div><div class="sl">Gem. WPM</div></div>
-    <div class="stat-card"><div class="sv" id="stBestWPM">–</div><div class="sl">Best WPM</div></div>
+    <div class="stat-card"><div class="sv" id="stAvgWPM">&#8211;</div><div class="sl">Gem. WPM</div></div>
+    <div class="stat-card"><div class="sv" id="stBestWPM">&#8211;</div><div class="sl">Best WPM</div></div>
     <div class="stat-card"><div class="sv" id="stSessions">0</div><div class="sl">Sessies</div></div>
     <div class="stat-card"><div class="sv" id="stNumScore">0</div><div class="sl">Getallen correct</div></div>
   </div>
@@ -1158,55 +1158,47 @@ box-shadow:0 4px 24px #00ffcc22;
     <div style="font-size:0.8rem; color:#555; margin-bottom:8px;">WPM per sessie (laatste 20)</div>
     <div class="wpm-bar-row" id="wpmChart"></div>
   </div>
-  <button onclick="App.clearStats()" class="btn btn-danger" style="margin-top:12px;">🗑️ Reset statistieken</button>
-  <button onclick="Guide.resetOnboarding()" class="btn btn-neutral" style="margin-top:8px;">🔄 Herdoe nulmeting</button>
+  <button onclick="App.clearStats()" class="btn btn-danger" style="margin-top:12px;">&#128465;&#65039; Reset statistieken</button>
+  <button onclick="Guide.resetOnboarding()" class="btn btn-neutral" style="margin-top:8px;">&#128260; Herdoe nulmeting</button>
 </section>
 
 </div><!-- /container -->
 <script>
 
-// Global error handler for debugging
-window.addEventListener(‘error’, function(e){
-console.error(‘App error:’, e.message, ‘at’, e.filename, ‘line’, e.lineno);
-});
-window.addEventListener(‘unhandledrejection’, function(e){
-console.error(‘Unhandled promise rejection:’, e.reason);
-});
-
 //  DATA
-// ═══════════════════════════════════════════════════════════════════
-const DEFAULT_TEXT = `Speed reading helpt je om informatie sneller te verwerken door je visuele spanwijdte te vergroten. Tony Buzan ontwikkelde technieken waarbij je de ogen traint als een camera die in één oogopslag een heel zinsdeel vastlegt. Door regelmatige oefening leer je subvocalisatie te verminderen en je blikveld te verbreden. Het resultaat is een hogere leessnelheid met behoud van begrip en concentratie. De hersenen zijn relativistische organen die zich aanpassen aan nieuwe normen. Wanneer je jezelf dwingt sneller te lezen, past je brein zich aan en maakt het tempo na verloop van tijd normaal. Dit is het principe achter de metronoom-trainingsmethode die Buzan beschrijft in zijn boek The Speed Reading Book.`;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+const DEFAULT_TEXT = `Speed reading helpt je om informatie sneller te verwerken door je visuele spanwijdte te vergroten. Tony Buzan ontwikkelde technieken waarbij je de ogen traint als een camera die in \u00E9\u00E9n oogopslag een heel zinsdeel vastlegt. Door regelmatige oefening leer je subvocalisatie te verminderen en je blikveld te verbreden. Het resultaat is een hogere leessnelheid met behoud van begrip en concentratie. De hersenen zijn relativistische organen die zich aanpassen aan nieuwe normen. Wanneer je jezelf dwingt sneller te lezen, past je brein zich aan en maakt het tempo na verloop van tijd normaal. Dit is het principe achter de metronoom-trainingsmethode die Buzan beschrijft in zijn boek The Speed Reading Book.`;
 
 const BUZAN_TIPS = {
-1: [“🖐️ <b>Beginner:</b> Gebruik je vinger als geleider — volg elk woord fysiek.”,
-“👁️ Kijk naar je vinger, niet naar het woord. Je ogen volgen automatisch.”,
-“🔇 Probeer het woord <b>niet</b> in je hoofd uit te spreken.”,
-“📏 Houd een rustig, constant tempo aan. Regelmaat > snelheid.”],
-2: [“🦊 <b>Gevorderd:</b> Laat je ogen ‘springen’ van woordgroep naar woordgroep.”,
-“🔭 Focus op het <b>midden</b> van de groep — je leest perifeer mee.”,
-“⏩ Vertrouw op je hersenen. Je begrijpt meer dan je denkt bij dit tempo.”,
-“🔇 Hum zachtjes ‘mmm’ — dat doorbreekt de innerlijke stem.”],
-3: [“🦅 <b>Expert:</b> Scan van het begin tot het einde van de zin in één blikveld.”,
-“🌊 Denk aan een golf — ogen rollen soepel over de tekst.”,
-“🧠 Expert-lezers begrijpen bij <i>herziening</i>, niet per woord.”,
-“👀 Activeer je perifere zicht — zie de hele regel als één beeld.”],
+1: [”\uD83D\uDD90\uFE0F <b>Beginner:</b> Gebruik je vinger als geleider \u2014 volg elk woord fysiek.”,
+“\uD83D\uDC41\uFE0F Kijk naar je vinger, niet naar het woord. Je ogen volgen automatisch.”,
+“\uD83D\uDD07 Probeer het woord <b>niet</b> in je hoofd uit te spreken.”,
+“\uD83D\uDCCF Houd een rustig, constant tempo aan. Regelmaat > snelheid.”],
+2: [”\uD83E\uDD8A <b>Gevorderd:</b> Laat je ogen ‘springen’ van woordgroep naar woordgroep.”,
+“\uD83D\uDD2D Focus op het <b>midden</b> van de groep \u2014 je leest perifeer mee.”,
+“\u23E9 Vertrouw op je hersenen. Je begrijpt meer dan je denkt bij dit tempo.”,
+“\uD83D\uDD07 Hum zachtjes ‘mmm’ \u2014 dat doorbreekt de innerlijke stem.”],
+3: [”\uD83E\uDD85 <b>Expert:</b> Scan van het begin tot het einde van de zin in \u00E9\u00E9n blikveld.”,
+“\uD83C\uDF0A Denk aan een golf \u2014 ogen rollen soepel over de tekst.”,
+“\uD83E\uDDE0 Expert-lezers begrijpen bij <i>herziening</i>, niet per woord.”,
+“\uD83D\uDC40 Activeer je perifere zicht \u2014 zie de hele regel als \u00E9\u00E9n beeld.”],
 };
 
 // Vocab database (prefix/suffix quiz)
 const VOCAB_DB = {
 prefix: [
-{ q:“Wat betekent het voorvoegsel ‘anti-’?”, opts:[“Tegen, tegenovergesteld”,“Vóór, vooruit”,“Samen met”,“Onder, beneden”], ans:0, tip:“anti-pathy = afkeer (tegen gevoel)” },
-{ q:“Wat betekent het voorvoegsel ‘pre-’?”, opts:[“Na, achter”,“Vóór, eerder”,“Halverwege”,“Boven, over”], ans:1, tip:“pre-view = vooruitkijken” },
+{ q:“Wat betekent het voorvoegsel ‘anti-’?”, opts:[“Tegen, tegenovergesteld”,“V\u00F3\u00F3r, vooruit”,“Samen met”,“Onder, beneden”], ans:0, tip:“anti-pathy = afkeer (tegen gevoel)” },
+{ q:“Wat betekent het voorvoegsel ‘pre-’?”, opts:[“Na, achter”,“V\u00F3\u00F3r, eerder”,“Halverwege”,“Boven, over”], ans:1, tip:“pre-view = vooruitkijken” },
 { q:“Wat betekent het voorvoegsel ‘sub-’?”, opts:[“Boven”,“Naast”,“Onder, beneden”,“Buiten”], ans:2, tip:“sub-marine = onder de zee” },
 { q:“Wat betekent het voorvoegsel ‘trans-’?”, opts:[“Terug”,“Dwars door, over”,“Langs”,“Binnen”], ans:1, tip:“trans-atlantic = over de Atlantische Oceaan” },
 { q:“Wat betekent het voorvoegsel ‘inter-’?”, opts:[“Naast”,“Tussen, onderling”,“Na”,“Voor”], ans:1, tip:“inter-national = tussen landen” },
-{ q:“Wat betekent het voorvoegsel ‘mono-’?”, opts:[“Twee”,“Drie”,“Veel”,“Eén”], ans:3, tip:“mono-logue = één spreker” },
-{ q:“Wat betekent het voorvoegsel ‘bi-’?”, opts:[“Eén”,“Twee”,“Vier”,“Acht”], ans:1, tip:“bi-cycle = tweewieler” },
+{ q:“Wat betekent het voorvoegsel ‘mono-’?”, opts:[“Twee”,“Drie”,“Veel”,“E\u00E9n”], ans:3, tip:“mono-logue = \u00E9\u00E9n spreker” },
+{ q:“Wat betekent het voorvoegsel ‘bi-’?”, opts:[“E\u00E9n”,“Twee”,“Vier”,“Acht”], ans:1, tip:“bi-cycle = tweewieler” },
 { q:“Wat betekent het voorvoegsel ‘circum-’?”, opts:[“Binnen”,“Buiten”,“Rondom”,“Halverwege”], ans:2, tip:“circum-navigate = rondom navigeren” },
 { q:“Wat betekent het voorvoegsel ‘extra-’?”, opts:[“Buiten, voorbij”,“Binnen”,“Onder”,“Tegenover”], ans:0, tip:“extra-ordinary = buiten gewoon” },
 { q:“Wat betekent het voorvoegsel ‘retro-’?”, opts:[“Voorwaarts”,“Achterwaarts, terug”,“Omhoog”,“Opzij”], ans:1, tip:“retro-active = terugwerkend” },
 { q:“Wat betekent het voorvoegsel ‘omni-’?”, opts:[“Geen”,“Alles, overal”,“Half”,“Klein”], ans:1, tip:“omni-vore = alleseter” },
-{ q:“Wat betekent het voorvoegsel ‘poly-’?”, opts:[“Eén”,“Geen”,“Veel”,“Weinig”], ans:2, tip:“poly-glot = iemand die veel talen spreekt” },
+{ q:“Wat betekent het voorvoegsel ‘poly-’?”, opts:[“E\u00E9n”,“Geen”,“Veel”,“Weinig”], ans:2, tip:“poly-glot = iemand die veel talen spreekt” },
 { q:“Wat betekent het voorvoegsel ‘micro-’?”, opts:[“Klein”,“Groot”,“Snel”,“Oud”], ans:0, tip:“micro-scope = instrument voor kleine dingen” },
 { q:“Wat betekent het voorvoegsel ‘macro-’?”, opts:[“Klein”,“Groot, op grote schaal”,“Snel”,“Nieuw”], ans:1, tip:“macro-economics = grote economie” },
 ],
@@ -1222,37 +1214,30 @@ suffix: [
 { q:“Wat betekent het achtervoegsel ‘-ness’?”, opts:[“Toestand of eigenschap”,“Handeling”,“Persoon”,“Richting”], ans:0, tip:“happi-ness = toestand van gelukkig zijn” },
 { q:“Wat betekent het achtervoegsel ‘-graph’?”, opts:[“Studie van”,“Schrift, schrijven over”,“Liefde voor”,“Angst voor”], ans:1, tip:“photo-graph = lichtschrift” },
 { q:“Wat betekent het achtervoegsel ‘-cide’?”, opts:[“Schepper van”,“Doding, doder”,“Studie van”,“Liefde voor”], ans:1, tip:“homi-cide = mensendoding” },
-{ q:“Wat betekent het achtervoegsel ‘-archy’?”, opts:[“Wetenschap”,“Bestuur, heerschappij”,“Toestand”,“Klein”], ans:1, tip:“mon-archy = heerschappij door één persoon” },
+{ q:“Wat betekent het achtervoegsel ‘-archy’?”, opts:[“Wetenschap”,“Bestuur, heerschappij”,“Toestand”,“Klein”], ans:1, tip:“mon-archy = heerschappij door \u00E9\u00E9n persoon” },
 ],
 mixed: [] // filled at runtime
 };
 VOCAB_DB.mixed = […VOCAB_DB.prefix, …VOCAB_DB.suffix].sort(() => Math.random()-0.5);
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  HELPERS
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 let _intervals = [], _timeouts = [];
 function safeSetInterval(fn, ms){ let id = setInterval(fn,ms); _intervals.push(id); return id; }
 function safeSetTimeout(fn, ms){ let id = setTimeout(fn,ms); _timeouts.push(id); return id; }
 function clearAll(){ _intervals.forEach(clearInterval); _timeouts.forEach(clearTimeout); _intervals=[]; _timeouts=[]; }
 
-function getStats(){
-const EMPTY=’{“wpm”:[],“num”:0,“scan”:0,“peri”:0,“vocab”:0,“palace”:0,“onboardDone”:false,“userLevel”:1,“startWPM”:150,“metroSessions”:0,“eyeSessions”:0}’;
-try{ return JSON.parse(localStorage.getItem(‘bsr_v5’)||EMPTY); }
-catch(e){ return JSON.parse(EMPTY); }
-}
-function saveStats(s){
-try{ localStorage.setItem(‘bsr_v5’, JSON.stringify(s)); } catch(e){}
-updateStatsUI();
-}
+function getStats(){ return JSON.parse(localStorage.getItem(‘bsr_v5’)||’{“wpm”:[],“num”:0,“scan”:0,“peri”:0,“vocab”:0,“palace”:0,“onboardDone”:false,“userLevel”:1,“startWPM”:150,“metroSessions”:0,“eyeSessions”:0}’); }
+function saveStats(s){ localStorage.setItem(‘bsr_v5’, JSON.stringify(s)); updateStatsUI(); }
 function addWPM(wpm){ let s=getStats(); s.wpm.push(wpm); saveStats(s); Guide.checkMilestones(); }
 
 function updateStatsUI(){
 const s = getStats();
 const avg = s.wpm.length ? Math.round(s.wpm.reduce((a,b)=>a+b)/s.wpm.length) : 0;
 const best = s.wpm.length ? Math.max(…s.wpm) : 0;
-document.getElementById(‘stAvgWPM’).textContent  = avg  || ‘–’;
-document.getElementById(‘stBestWPM’).textContent = best || ‘–’;
+document.getElementById(‘stAvgWPM’).textContent  = avg  || ‘\u2013’;
+document.getElementById(‘stBestWPM’).textContent = best || ‘\u2013’;
 document.getElementById(‘stSessions’).textContent= s.wpm.length;
 document.getElementById(‘stNumScore’).textContent= s.num;
 // Chart
@@ -1262,9 +1247,9 @@ const maxW = recent.length ? Math.max(…recent) : 1;
 chart.innerHTML = recent.map(w=>`<div class="wpm-bar" style="height:${Math.round((w/maxW)*75)+5}px" title="${w} WPM"></div>`).join(’’);
 }
 
-// ═══════════════════════════════════════════════════════════════════
-//  LEARNING GUIDE — leerpad, dashboard, gating
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+//  LEARNING GUIDE \u2014 leerpad, dashboard, gating
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 function showDash(){
 document.querySelectorAll(‘section’).forEach(s=>s.classList.remove(‘active’));
 document.querySelectorAll(’.nav-btn’).forEach(b=>b.classList.remove(‘active’));
@@ -1297,17 +1282,17 @@ setTimeout(()=>t.classList.remove(‘show’),3500);
 // Learning path definition
 const LEARNING_PATH = [
 {
-id:‘reading’, icon:‘📖’, name:‘Begeleid Lezen’,
-desc:‘Buzan geleider · 3 niveaus’,
+id:‘reading’, icon:’\uD83D\uDCD6’, name:‘Begeleid Lezen’,
+desc:‘Buzan geleider \u00B7 3 niveaus’,
 unlock:‘Altijd beschikbaar’,
 unlockFn: ()=>true,
 goalFn: ()=>{ const s=getStats(); return (s.wpm.filter(w=>w>=200).length>=3); },
-goalDesc:‘3× boven 200 WPM halen’,
+goalDesc:‘3\u00D7 boven 200 WPM halen’,
 section:‘reading’, color:’#00ffcc’
 },
 {
-id:‘numflash’, icon:‘🔢’, name:‘Perceptie Training’,
-desc:‘Getal-flash · snelle fixaties’,
+id:‘numflash’, icon:’\uD83D\uDD22’, name:‘Perceptie Training’,
+desc:‘Getal-flash \u00B7 snelle fixaties’,
 unlock:‘Altijd beschikbaar’,
 unlockFn: ()=>true,
 goalFn: ()=>{ const s=getStats(); return s.num>=10; },
@@ -1315,17 +1300,17 @@ goalDesc:‘10 getallen correct raden’,
 section:‘numflash’, color:’#ffb400’
 },
 {
-id:‘metronoom’, icon:‘🎵’, name:‘Metronoom Training’,
+id:‘metronoom’, icon:’\uD83C\uDFB5’, name:‘Metronoom Training’,
 desc:‘Relativistisch tempo-opbouw’,
 unlock:‘Na 200 WPM’,
 unlockFn: ()=>{ const s=getStats(); return s.wpm.some(w=>w>=200); },
 goalFn: ()=>{ const s=getStats(); return s.wpm.filter(w=>w>=350).length>=3; },
-goalDesc:‘3× boven 350 WPM halen’,
+goalDesc:‘3\u00D7 boven 350 WPM halen’,
 section:‘metronoom’, color:’#4488ff’
 },
 {
-id:‘scan’, icon:‘🔍’, name:‘Scan Oefening’,
-desc:‘Perifeer scannen · getallen rijen’,
+id:‘scan’, icon:’\uD83D\uDD0D’, name:‘Scan Oefening’,
+desc:‘Perifeer scannen \u00B7 getallen rijen’,
 unlock:‘Altijd beschikbaar’,
 unlockFn: ()=>true,
 goalFn: ()=>{ const s=getStats(); return (s.scan||0)>=20; },
@@ -1333,8 +1318,8 @@ goalDesc:‘20 scan-treffers’,
 section:‘scan’, color:’#cc44ff’
 },
 {
-id:‘eye’, icon:‘👁️’, name:‘Oogbeweging Trainer’,
-desc:‘Cirkel · zigzag · S-golf’,
+id:‘eye’, icon:’\uD83D\uDC41\uFE0F’, name:‘Oogbeweging Trainer’,
+desc:‘Cirkel \u00B7 zigzag \u00B7 S-golf’,
 unlock:‘Na 5 metronoom-sessies’,
 unlockFn: ()=>{ const s=getStats(); return (s.metroSessions||0)>=2||s.wpm.length>=5; },
 goalFn: ()=>{ const s=getStats(); return (s.eyeSessions||0)>=5; },
@@ -1342,7 +1327,7 @@ goalDesc:‘5 oogbeweging-sessies’,
 section:‘eye’, color:’#00ccff’
 },
 {
-id:‘peripheral’, icon:‘🌅’, name:‘Perifeer Zicht’,
+id:‘peripheral’, icon:’\uD83C\uDF05’, name:‘Perifeer Zicht’,
 desc:‘Blikveld verbreden’,
 unlock:‘Na oogbeweging-training’,
 unlockFn: ()=>{ const s=getStats(); return (s.eyeSessions||0)>=3||s.wpm.some(w=>w>=300); },
@@ -1351,17 +1336,17 @@ goalDesc:‘30 perifere woorden correct’,
 section:‘peripheral’, color:’#ff8844’
 },
 {
-id:‘preview’, icon:‘⚡’, name:‘Preview Techniek’,
+id:‘preview’, icon:’\u26A1’, name:‘Preview Techniek’,
 desc:‘Mentale verkenning voor het lezen’,
 unlock:‘Na 350 WPM gemiddeld’,
 unlockFn: ()=>{ const s=getStats(); const avg=s.wpm.length?s.wpm.slice(-5).reduce((a,b)=>a+b)/Math.min(s.wpm.length,5):0; return avg>=300; },
 goalFn: ()=>{ const s=getStats(); return s.wpm.filter(w=>w>=400).length>=2; },
-goalDesc:‘2× boven 400 WPM na preview’,
+goalDesc:‘2\u00D7 boven 400 WPM na preview’,
 section:‘preview’, color:’#ffcc00’
 },
 {
-id:‘vocab’, icon:‘📚’, name:‘Vocab Mastermind’,
-desc:‘Prefix · suffix · woordwortels’,
+id:‘vocab’, icon:’\uD83D\uDCDA’, name:‘Vocab Mastermind’,
+desc:‘Prefix \u00B7 suffix \u00B7 woordwortels’,
 unlock:‘Altijd beschikbaar’,
 unlockFn: ()=>true,
 goalFn: ()=>{ const s=getStats(); return (s.vocab||0)>=30; },
@@ -1369,7 +1354,7 @@ goalDesc:‘30 vocab-vragen correct’,
 section:‘vocab’, color:’#88ff44’
 },
 {
-id:‘palace’, icon:‘🏛️’, name:‘Geheugenpaleis’,
+id:‘palace’, icon:’\uD83C\uDFDB\uFE0F’, name:‘Geheugenpaleis’,
 desc:‘Levi & Goldentouch methode’,
 unlock:‘Na 500 WPM’,
 unlockFn: ()=>{ const s=getStats(); return s.wpm.some(w=>w>=500); },
@@ -1378,21 +1363,21 @@ goalDesc:‘15 palace-terugroepingen correct’,
 section:‘palace’, color:’#44ffaa’
 },
 {
-id:‘ebbinghaus’, icon:‘🔁’, name:‘Spaced Repetition’,
+id:‘ebbinghaus’, icon:’\uD83D\uDD01’, name:‘Spaced Repetition’,
 desc:‘Ebbinghaus vergeetcurve’,
 unlock:‘Altijd beschikbaar’,
 unlockFn: ()=>true,
 goalFn: ()=>{ const cards=JSON.parse(localStorage.getItem(‘sr_cards’)||’[]’); return cards.filter(c=>c.reps>=3).length>=5; },
-goalDesc:‘5 kaarten 3× herhaald’,
+goalDesc:‘5 kaarten 3\u00D7 herhaald’,
 section:‘ebbinghaus’, color:’#cc88ff’
 },
 ];
 
 const DAILY_TASKS = [
-{ icon:‘📖’, name:‘Begeleid Lezen’,  dur:‘5 min’,  section:‘reading’,    key:‘dt_reading’ },
-{ icon:‘🔁’, name:‘Herhaling’,       dur:‘5 min’,  section:‘ebbinghaus’, key:‘dt_eb’ },
-{ icon:‘🔢’, name:‘Getal Flash’,     dur:‘3 min’,  section:‘numflash’,   key:‘dt_num’ },
-{ icon:‘📚’, name:‘Vocab’,           dur:‘3 min’,  section:‘vocab’,      key:‘dt_vocab’ },
+{ icon:’\uD83D\uDCD6’, name:‘Begeleid Lezen’,  dur:‘5 min’,  section:‘reading’,    key:‘dt_reading’ },
+{ icon:’\uD83D\uDD01’, name:‘Herhaling’,       dur:‘5 min’,  section:‘ebbinghaus’, key:‘dt_eb’ },
+{ icon:’\uD83D\uDD22’, name:‘Getal Flash’,     dur:‘3 min’,  section:‘numflash’,   key:‘dt_num’ },
+{ icon:’\uD83D\uDCDA’, name:‘Vocab’,           dur:‘3 min’,  section:‘vocab’,      key:‘dt_vocab’ },
 ];
 
 const Guide = {
@@ -1400,23 +1385,23 @@ buildDashboard(){
 const s=getStats();
 const hour=new Date().getHours();
 const greet = hour<12 ? ‘Goedemorgen’ : hour<17 ? ‘Goedemiddag’ : ‘Goedenavond’;
-document.getElementById(‘dashGreeting’).textContent=greet+’! 👋’;
+document.getElementById(‘dashGreeting’).textContent=greet+’! \uD83D\uDC4B’;
 
 ```
 // WPM hero
 const avgWPM=s.wpm.length?Math.round(s.wpm.slice(-5).reduce((a,b)=>a+b)/Math.min(s.wpm.length,5)):s.startWPM||150;
 const best=s.wpm.length?Math.max(...s.wpm):0;
-document.getElementById('dashWPM').textContent=avgWPM||'–';
+document.getElementById('dashWPM').textContent=avgWPM||'\u2013';
 const avg_world=238;
 const diff=avgWPM-avg_world;
 document.getElementById('dashWPMCompare').textContent=diff>=0?`+${diff} boven wereldgemiddeld (238 WPM)`:`${Math.abs(diff)} onder wereldgemiddeld (238 WPM)`;
 // target
 const lvl=OB_LEVELS[s.userLevel||1];
-document.getElementById('dashWPMTarget').textContent=avgWPM<(lvl?.target||300)?`🎯 Doel: ${lvl?.target} WPM voor volgende level`:'✅ Doelsnelheid bereikt! Ga naar het volgende level.';
+document.getElementById('dashWPMTarget').textContent=avgWPM<(lvl?.target||300)?`\uD83C\uDFAF Doel: ${lvl?.target} WPM voor volgende level`:'\u2705 Doelsnelheid bereikt! Ga naar het volgende level.';
 
 // Today tasks
 const todayKey='tasks_'+new Date().toDateString();
-const doneTasks=(()=>{ try{ return JSON.parse(localStorage.getItem(todayKey)||'[]'); }catch(e){ return []; } })();
+const doneTasks=JSON.parse(localStorage.getItem(todayKey)||'[]');
 const grid=document.getElementById('todayGrid');
 grid.innerHTML=DAILY_TASKS.map(t=>`
   <div class="today-card${doneTasks.includes(t.key)?' today-done':''}" onclick="showSection('${t.section}');Guide.markTask('${t.key}')">
@@ -1431,7 +1416,7 @@ steps.innerHTML=LEARNING_PATH.map(step=>{
   const unlocked=step.unlockFn();
   const done=step.goalFn();
   const badgeClass=done?'badge-done':unlocked?'badge-active':'badge-locked';
-  const badgeText=done?'✅ Behaald':unlocked?'▶ Actief':'🔒 Vergrendeld';
+  const badgeText=done?'\u2705 Behaald':unlocked?'\u25B6 Actief':'\uD83D\uDD12 Vergrendeld';
   const metCrit=unlocked&&!done;
   return `
     <div class="lp-step${done?' lp-done':unlocked?' lp-active':' lp-locked'}" style="--step-color:${step.color}"
@@ -1440,8 +1425,8 @@ steps.innerHTML=LEARNING_PATH.map(step=>{
       <div class="step-body">
         <div class="step-name">${step.name}</div>
         <div class="step-desc">${step.desc}</div>
-        ${unlocked&&!done?`<div class="step-crit">🎯 ${step.goalDesc}</div>`:''}
-        ${!unlocked?`<div class="step-crit">🔒 ${step.unlock}</div>`:''}
+        ${unlocked&&!done?`<div class="step-crit">\uD83C\uDFAF ${step.goalDesc}</div>`:''}
+        ${!unlocked?`<div class="step-crit">\uD83D\uDD12 ${step.unlock}</div>`:''}
       </div>
       <span class="step-badge ${badgeClass}">${badgeText}</span>
     </div>`;
@@ -1453,7 +1438,7 @@ steps.innerHTML=LEARNING_PATH.map(step=>{
 markTask(key){
 const todayKey=‘tasks_’+new Date().toDateString();
 const done=JSON.parse(localStorage.getItem(todayKey)||’[]’);
-if(!done.includes(key)){ done.push(key); try{ localStorage.setItem(todayKey,JSON.stringify(done)); }catch(e){} }
+if(!done.includes(key)){ done.push(key); localStorage.setItem(todayKey,JSON.stringify(done)); }
 },
 
 applyGates(){
@@ -1476,18 +1461,18 @@ if(el) el.classList.toggle(‘show’, !fn());
 checkMilestones(){
 const s=getStats();
 const milestones=[
-{ wpm:200, msg:‘🎉 200 WPM bereikt! Metronoom Training ontgrendeld.’ },
-{ wpm:350, msg:‘🚀 350 WPM bereikt! Preview Techniek bijna beschikbaar.’ },
-{ wpm:500, msg:‘🦅 500 WPM! Geheugenpaleis ontgrendeld.’ },
-{ wpm:700, msg:‘🏆 700 WPM! Je bent een expert-lezer.’ },
+{ wpm:200, msg:’\uD83C\uDF89 200 WPM bereikt! Metronoom Training ontgrendeld.’ },
+{ wpm:350, msg:’\uD83D\uDE80 350 WPM bereikt! Preview Techniek bijna beschikbaar.’ },
+{ wpm:500, msg:’\uD83E\uDD85 500 WPM! Geheugenpaleis ontgrendeld.’ },
+{ wpm:700, msg:’\uD83C\uDFC6 700 WPM! Je bent een expert-lezer.’ },
 ];
 const best=s.wpm.length?Math.max(…s.wpm):0;
-const shown=(()=>{ try{ return JSON.parse(localStorage.getItem(‘milestones_shown’)||’[]’); }catch(e){ return []; } })();
+const shown=JSON.parse(localStorage.getItem(‘milestones_shown’)||’[]’);
 milestones.forEach(m=>{
 if(best>=m.wpm&&!shown.includes(m.wpm)){
 showToast(m.msg);
 shown.push(m.wpm);
-try{ localStorage.setItem(‘milestones_shown’,JSON.stringify(shown)); }catch(e){}
+localStorage.setItem(‘milestones_shown’,JSON.stringify(shown));
 }
 });
 this.applyGates();
@@ -1496,22 +1481,22 @@ this.applyGates();
 resetOnboarding(){
 if(confirm(‘Herdoe de nulmeting? Je statistieken blijven bewaard.’)){
 const s=getStats(); s.onboardDone=false; saveStats(s);
-try{ localStorage.removeItem(‘milestones_shown’); }catch(e){}
+localStorage.removeItem(‘milestones_shown’);
 location.reload();
 }
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  ONBOARDING
-// ═══════════════════════════════════════════════════════════════════
-const OB_TEXT = `Speed reading helpt je informatie sneller te verwerken. Tony Buzan ontdekte dat de meeste mensen slechts een fractie van hun leespotentieel gebruiken. Door de ogen te trainen als een camera — in één oogopslag een heel zinsdeel vastleggen — en subvocalisatie te verminderen, kunnen gewone lezers hun snelheid verdubbelen of verdrievoudigen. Het geheim zit niet in harder proberen, maar in slimmer oefenen met de juiste technieken.`;
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+const OB_TEXT = `Speed reading helpt je informatie sneller te verwerken. Tony Buzan ontdekte dat de meeste mensen slechts een fractie van hun leespotentieel gebruiken. Door de ogen te trainen als een camera \u2014 in \u00E9\u00E9n oogopslag een heel zinsdeel vastleggen \u2014 en subvocalisatie te verminderen, kunnen gewone lezers hun snelheid verdubbelen of verdrievoudigen. Het geheim zit niet in harder proberen, maar in slimmer oefenen met de juiste technieken.`;
 
 const OB_LEVELS = [
-{ icon:‘🐢’, label:‘Beginner’,    range:’< 150 WPM’,   min:0,   max:149,  target:200 },
-{ icon:‘📖’, label:‘Gemiddeld’,   range:‘150–250 WPM’, min:150, max:250,  target:350 },
-{ icon:‘🦊’, label:‘Gevorderd’,   range:‘250–400 WPM’, min:251, max:400,  target:500 },
-{ icon:‘🦅’, label:‘Expert’,      range:‘400+ WPM’,    min:401, max:9999, target:700 },
+{ icon:’\uD83D\uDC22’, label:‘Beginner’,    range:’< 150 WPM’,   min:0,   max:149,  target:200 },
+{ icon:’\uD83D\uDCD6’, label:‘Gemiddeld’,   range:‘150\u2013250 WPM’, min:150, max:250,  target:350 },
+{ icon:’\uD83E\uDD8A’, label:‘Gevorderd’,   range:‘250\u2013400 WPM’, min:251, max:400,  target:500 },
+{ icon:’\uD83E\uDD85’, label:‘Expert’,      range:‘400+ WPM’,    min:401, max:9999, target:700 },
 ];
 
 const OB = {
@@ -1543,7 +1528,7 @@ startRead(){
 this.readStart = performance.now();
 document.getElementById(‘obStartReadBtn’).style.display=‘none’;
 document.getElementById(‘obDoneReadBtn’).style.display=’’;
-document.getElementById(‘obReadStatus’).textContent=‘⏱️ Timer loopt… Lees rustig door.’;
+document.getElementById(‘obReadStatus’).textContent=’\u23F1\uFE0F Timer loopt… Lees rustig door.’;
 },
 
 doneRead(){
@@ -1596,7 +1581,7 @@ showDash();
 };
 
 //  BUZAN READING
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const App = {
 currentText: DEFAULT_TEXT,
 buzanLevel: 1,
@@ -1690,7 +1675,7 @@ document.getElementById(‘buzanProgress’).style.width = pct+’%’;
 if(this.buzanStartTime){
 const elapsed = (performance.now()-this.buzanStartTime)/60000;
 const done = this.buzanChunks.slice(0,this.buzanWordIndex).flat().length;
-document.getElementById(‘buzanLiveWPM’).textContent = elapsed>0 ? Math.round(done/elapsed)+’ WPM’ : ‘–’;
+document.getElementById(‘buzanLiveWPM’).textContent = elapsed>0 ? Math.round(done/elapsed)+’ WPM’ : ‘\u2013’;
 }
 },
 _finish(){
@@ -1701,22 +1686,22 @@ const total = this.currentText.split(/\s+/).filter(Boolean).length;
 const elapsed = (performance.now()-this.buzanStartTime)/60000;
 const wpm = Math.round(total/elapsed);
 document.getElementById(‘buzanResultWPM’).textContent = wpm;
-const fb = [[0,150,‘🐢 Goed begin!’],[150,300,‘🦊 Prima!’],[300,500,‘🦅 Uitstekend!’],[500,9999,‘🚀 Indrukwekkend!’]].find(([lo,hi])=>wpm>=lo&&wpm<hi);
+const fb = [[0,150,’\uD83D\uDC22 Goed begin!’],[150,300,’\uD83E\uDD8A Prima!’],[300,500,’\uD83E\uDD85 Uitstekend!’],[500,9999,’\uD83D\uDE80 Indrukwekkend!’]].find(([lo,hi])=>wpm>=lo&&wpm<hi);
 document.getElementById(‘buzanResultFeedback’).textContent = fb?fb[2]:’’;
 document.getElementById(‘buzanResult’).classList.remove(‘hidden’);
 addWPM(wpm);
 },
-pauseBuzan(){ if(this.buzanInterval){ clearTimeout(this.buzanInterval); this.buzanPaused=true; document.getElementById(‘buzanTip’).innerHTML=‘⏸ <b>Gepauzeerd.</b> Druk Start om door te gaan.’; } },
+pauseBuzan(){ if(this.buzanInterval){ clearTimeout(this.buzanInterval); this.buzanPaused=true; document.getElementById(‘buzanTip’).innerHTML=’\u23F8 <b>Gepauzeerd.</b> Druk Start om door te gaan.’; } },
 stopBuzan(){
 clearTimeout(this.buzanInterval); clearInterval(this.buzanTipInt);
 this.buzanInterval=null; this.buzanPaused=false; this.buzanWordIndex=0;
 document.getElementById(‘buzanProgress’).style.width=‘0%’;
-document.getElementById(‘buzanLiveWPM’).textContent=’– WPM’;
+document.getElementById(‘buzanLiveWPM’).textContent=’\u2013 WPM’;
 document.querySelectorAll(’#buzanTextDisplay .word’).forEach(el=>el.classList.remove(‘active’));
 },
 clearStats(){
 if(confirm(‘Weet je zeker dat je alle statistieken wilt verwijderen?’)){
-try{ localStorage.removeItem(‘bsr_v5’); }catch(e){}
+localStorage.removeItem(‘bsr_v5’);
 localStorage.removeItem(‘milestones_shown’);
 updateStatsUI();
 Guide.buildDashboard();
@@ -1725,9 +1710,9 @@ Guide.applyGates();
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  METRONOOM TRAINING
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const Metro = {
 text: DEFAULT_TEXT,
 baseWPM: 150,
@@ -1782,7 +1767,7 @@ el.classList.remove(‘active-phase’,‘done-phase’);
 if(i < this.phase) el.classList.add(‘done-phase’);
 if(i === this.phase) el.classList.add(‘active-phase’);
 });
-document.getElementById(‘metroLiveInfo’).textContent = ‘Fase ‘+(this.phase+1)+’ · ‘+wpm+’ WPM’;
+document.getElementById(‘metroLiveInfo’).textContent = ‘Fase ‘+(this.phase+1)+’ \u00B7 ‘+wpm+’ WPM’;
 this.phaseStartTime = performance.now();
 this._tick(wpm);
 },
@@ -1808,7 +1793,7 @@ this.timer = setTimeout(()=>this._tick(wpm), ms);
 _finish(){
 this.running = false;
 const avgWPM = this.totalTime > 0 ? Math.round(this.totalWordsRead/this.totalTime) : this.baseWPM+200;
-document.getElementById(‘metroFlashBox’).textContent = ‘✓’;
+document.getElementById(‘metroFlashBox’).textContent = ‘\u2713’;
 document.getElementById(‘metroResult’).classList.remove(‘hidden’);
 document.getElementById(‘metroResultWPM’).textContent = this.phases[4];
 document.getElementById(‘metroResultFb’).textContent = `Je hersenen zijn nu gewend aan ${this.phases[4]} WPM. Je "normale" snelheid van ${this.baseWPM} WPM voelt nu traag!`;
@@ -1823,9 +1808,9 @@ document.getElementById(‘metroProgress’).style.width=‘0%’;
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  GETAL FLASH
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const Num = {
 diff: 1, lastNum: ‘’, flashDur: 600,
 correct: 0, total: 0,
@@ -1862,9 +1847,9 @@ const ok = g===this.lastNum;
 this.total++;
 if(ok) this.correct++;
 const fb = document.getElementById(‘numFeedback’);
-fb.textContent = ok ? ‘✅ Correct!’ : ‘❌ Fout: ‘+this.lastNum;
+fb.textContent = ok ? ‘\u2705 Correct!’ : ‘\u274C Fout: ‘+this.lastNum;
 fb.style.color = ok ? ‘var(–primary)’ : ‘var(–red)’;
-document.getElementById(‘numFlashBox’).textContent = ok ? ‘✓’ : this.lastNum;
+document.getElementById(‘numFlashBox’).textContent = ok ? ‘\u2713’ : this.lastNum;
 document.getElementById(‘numFlashBox’).style.color = ok ? ‘var(–primary)’ : ‘var(–red)’;
 document.getElementById(‘numInputArea’).classList.add(‘hidden’);
 document.getElementById(‘numStartBtn’).classList.remove(‘hidden’);
@@ -1875,9 +1860,9 @@ if(ok){ let s=getStats(); s.num++; saveStats(s); }
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  SCAN OEFENING
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const Scan = {
 diff: 1, rows: [], rowsDone: 0, totalRows: 8,
 startTime: null, timerInt: null,
@@ -1937,13 +1922,13 @@ const cells = document.querySelectorAll(`#srow${ri} .scan-num`);
 if(val===row.target){
 this.correct++;
 cells[ni].classList.add(‘correct’);
-document.getElementById(‘scanFeedback’).textContent=‘✅ Correct!’;
+document.getElementById(‘scanFeedback’).textContent=’\u2705 Correct!’;
 document.getElementById(‘scanFeedback’).style.color=‘var(–primary)’;
 let s=getStats(); s.scan=(s.scan||0)+1; saveStats(s);
 } else {
 cells[ni].classList.add(‘wrong’);
 cells[row.pos-1].classList.add(‘correct’);
-document.getElementById(‘scanFeedback’).textContent=’❌ Fout! Het was: ’+row.target;
+document.getElementById(‘scanFeedback’).textContent=’\u274C Fout! Het was: ’+row.target;
 document.getElementById(‘scanFeedback’).style.color=‘var(–red)’;
 }
 this.rowsDone++;
@@ -1952,14 +1937,14 @@ document.getElementById(‘scanScore’).textContent=this.correct+’/’+this.t
 if(this.rowsDone>=this.totalRows){
 clearInterval(this.timerInt);
 const t=((performance.now()-this.startTime)/1000).toFixed(1);
-document.getElementById(‘scanFeedback’).textContent=`✅ Klaar! ${this.correct}/${this.totalRows} correct in ${t}s`;
+document.getElementById(‘scanFeedback’).textContent=`\u2705 Klaar! ${this.correct}/${this.totalRows} correct in ${t}s`;
 }
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  OOGBEWEGING TRAINER
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const Eye = {
 pattern: ‘circle’,
 speed: 4,
@@ -1977,7 +1962,7 @@ if(this.animating) this.start();
 },
 setSpeed(v){
 this.speed=parseInt(v);
-const labels=[’–’,‘Heel langzaam’,‘Langzaam’,‘Rustig’,‘Normaal’,‘Gemiddeld’,‘Snel’,‘Sneller’,‘Heel snel’,‘Extreem’,‘Max’];
+const labels=[’\u2013’,‘Heel langzaam’,‘Langzaam’,‘Rustig’,‘Normaal’,‘Gemiddeld’,‘Snel’,‘Sneller’,‘Heel snel’,‘Extreem’,‘Max’];
 document.getElementById(‘eyeSpeedLabel’).textContent=labels[v]||v;
 },
 _getPos(t, w, h){
@@ -2056,9 +2041,9 @@ if(canvas){ const ctx=canvas.getContext(‘2d’); ctx.clearRect(0,0,canvas.widt
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  PERIFEER ZICHT
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const Peri = {
 diff: 1,
 words: [],
@@ -2131,7 +2116,7 @@ this.attempts++;
 this.correct+=found;
 const total=side.length;
 const fb=document.getElementById(‘periFeedbackLine’);
-fb.textContent=`${found}/${total} randwoorden correct! Woorden waren: ${this.currentWords.join(' · ')}`;
+fb.textContent=`${found}/${total} randwoorden correct! Woorden waren: ${this.currentWords.join(' \u00B7 ')}`;
 fb.style.color=found===total?‘var(–primary)’:‘var(–accent)’;
 const s=getStats(); s.peri=(s.peri||0)+found; saveStats(s);
 const pct=this.attempts>0?(this.correct/(this.attempts*(this._getCount()-1))*100):0;
@@ -2140,9 +2125,9 @@ document.getElementById(‘periScore’).textContent=this.correct+‘pt’;
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  PREVIEW TECHNIEK
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const Preview = {
 text: DEFAULT_TEXT,
 previewDur: 10,
@@ -2182,12 +2167,12 @@ if(!this.scanning) return;
 const elapsed=performance.now()-start;
 const pct=Math.min(elapsed/dur,1);
 line.style.top=(pct*H)+‘px’;
-status.innerHTML=`👁️ <b>Preview scan:</b> ${Math.ceil((1-pct)*this.previewDur)}s resterend — scan de structuur!`;
+status.innerHTML=`\uD83D\uDC41\uFE0F <b>Preview scan:</b> ${Math.ceil((1-pct)*this.previewDur)}s resterend \u2014 scan de structuur!`;
 if(pct<1){ this.scanTimer=requestAnimationFrame(tick); }
 else {
 this.scanning=false;
 line.classList.add(‘hidden’);
-status.innerHTML=‘✅ <b>Preview klaar!</b> Druk nu op 📖 Lees nu om de tekst te lezen.’;
+status.innerHTML=’\u2705 <b>Preview klaar!</b> Druk nu op \uD83D\uDCD6 Lees nu om de tekst te lezen.’;
 }
 };
 this.scanTimer=requestAnimationFrame(tick);
@@ -2199,7 +2184,7 @@ this.reading=true;
 this.readStart=performance.now();
 const status=document.getElementById(‘previewStatus’);
 status.style.display=‘block’;
-status.innerHTML=‘📖 <b>Lees nu!</b> Druk ⏹ Stop als je klaar bent.’;
+status.innerHTML=’\uD83D\uDCD6 <b>Lees nu!</b> Druk \u23F9 Stop als je klaar bent.’;
 document.getElementById(‘previewReadResult’).classList.add(‘hidden’);
 },
 stop(){
@@ -2211,7 +2196,7 @@ if(this.reading && this.readStart){
 const wpm=Math.round(this.text.split(/\s+/).filter(Boolean).length/((performance.now()-this.readStart)/60000));
 if(wpm>0 && wpm<5000){
 document.getElementById(‘previewWPM’).textContent=wpm;
-document.getElementById(‘previewFb’).textContent=wpm>300?‘🦅 Uitstekend! De preview heeft geholpen!’:‘🦊 Goed! Probeer het opnieuw na de preview voor een hogere score.’;
+document.getElementById(‘previewFb’).textContent=wpm>300?’\uD83E\uDD85 Uitstekend! De preview heeft geholpen!’:’\uD83E\uDD8A Goed! Probeer het opnieuw na de preview voor een hogere score.’;
 document.getElementById(‘previewReadResult’).classList.remove(‘hidden’);
 addWPM(wpm);
 }
@@ -2220,9 +2205,9 @@ this.readStart=null;
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  VOCABULAIRE MASTERMIND
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const Vocab = {
 category: ‘prefix’,
 pool: [],
@@ -2266,35 +2251,35 @@ else if(b===btn && !ok) b.classList.add(‘wrong’);
 if(ok){ this.score++; this.streak++; let s=getStats(); s.vocab=(s.vocab||0)+1; saveStats(s); }
 else { this.streak=0; }
 const fb=document.getElementById(‘vocabFeedback’);
-fb.textContent=ok?`✅ Correct! ${tip||''}`:`❌ Fout! ${tip||''}`;
+fb.textContent=ok?`\u2705 Correct! ${tip||''}`:`\u274C Fout! ${tip||''}`;
 fb.style.color=ok?‘var(–primary)’:‘var(–red)’;
 this._updateScore();
 document.getElementById(‘vocabNextBtn’).style.display=’’;
 },
 _updateScore(){
 document.getElementById(‘vocabScoreDisplay’).textContent=this.score+’ / ‘+this.total;
-document.getElementById(‘vocabStreakBadge’).textContent=‘Reeks: ‘+this.streak+(this.streak>=3?’ 🔥’:’’);
+document.getElementById(‘vocabStreakBadge’).textContent=‘Reeks: ‘+this.streak+(this.streak>=3?’ \uD83D\uDD25’:’’);
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  GEHEUGENPALEIS (Levi & Goldentouch)
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const PALACE_WORDS = [
-{ word:‘Snelheid’,   image:‘🚀’, hook:‘Een raket schiet door een boek heen’ },
-{ word:‘Fixatie’,    image:‘🎯’, hook:‘Een scherpschutter starend naar één punt’ },
-{ word:‘Perifeer’,   image:‘🦅’, hook:‘Een adelaar die de hele horizon ziet’ },
-{ word:‘Subvocaal’,  image:‘🤫’, hook:‘Een fluisterende mond met een slot erop’ },
-{ word:‘Regressie’,  image:‘🔙’, hook:‘Een auto die achteruit de snelweg oprijdt’ },
-{ word:‘Chunking’,   image:‘🧩’, hook:‘Puzzelstukken die samen een woord vormen’ },
-{ word:‘Begrip’,     image:‘💡’, hook:‘Een gloeilamp die boven je hoofd ontploft’ },
-{ word:‘Metronoom’,  image:‘🎵’, hook:‘Een dansende noot die woorden dirigeert’ },
-{ word:‘Concentratie’,image:‘🔬’, hook:‘Een microscoop die een gedachte vergroot’ },
-{ word:‘Geheugen’,   image:‘🧠’, hook:‘Een hersenpan vol gloeiende beeldjes’ },
+{ word:‘Snelheid’,   image:’\uD83D\uDE80’, hook:‘Een raket schiet door een boek heen’ },
+{ word:‘Fixatie’,    image:’\uD83C\uDFAF’, hook:‘Een scherpschutter starend naar \u00E9\u00E9n punt’ },
+{ word:‘Perifeer’,   image:’\uD83E\uDD85’, hook:‘Een adelaar die de hele horizon ziet’ },
+{ word:‘Subvocaal’,  image:’\uD83E\uDD2B’, hook:‘Een fluisterende mond met een slot erop’ },
+{ word:‘Regressie’,  image:’\uD83D\uDD19’, hook:‘Een auto die achteruit de snelweg oprijdt’ },
+{ word:‘Chunking’,   image:’\uD83E\uDDE9’, hook:‘Puzzelstukken die samen een woord vormen’ },
+{ word:‘Begrip’,     image:’\uD83D\uDCA1’, hook:‘Een gloeilamp die boven je hoofd ontploft’ },
+{ word:‘Metronoom’,  image:’\uD83C\uDFB5’, hook:‘Een dansende noot die woorden dirigeert’ },
+{ word:‘Concentratie’,image:’\uD83D\uDD2C’, hook:‘Een microscoop die een gedachte vergroot’ },
+{ word:‘Geheugen’,   image:’\uD83E\uDDE0’, hook:‘Een hersenpan vol gloeiende beeldjes’ },
 ];
 
 const ROOM_NAMES = [‘Voordeur’,‘Woonkamer’,‘Keuken’,‘Badkamer’,‘Slaapkamer’,‘Tuin’];
-const ROOM_ICONS = [‘🚪’,‘🛋️’,‘🍳’,‘🛁’,‘🛏️’,‘🌳’];
+const ROOM_ICONS = [’\uD83D\uDEAA’,’\uD83D\uDECB\uFE0F’,’\uD83C\uDF73’,’\uD83D\uDEC1’,’\uD83D\uDECF\uFE0F’,’\uD83C\uDF33’];
 
 const Palace = {
 phase: 0,
@@ -2406,10 +2391,10 @@ document.getElementById(‘rc’+i).textContent = cnt>0?cnt+’’:’’;
 });
 this._drawCanvas(ctx, W, H);
 const remaining = PALACE_WORDS.length - this.placements.length;
-document.getElementById(‘palaceCurrentWordLabel’).textContent = remaining>0 ? PALACE_WORDS[this.placements.length].word : ‘— Klaar!’;
+document.getElementById(‘palaceCurrentWordLabel’).textContent = remaining>0 ? PALACE_WORDS[this.placements.length].word : ‘\u2014 Klaar!’;
 document.getElementById(‘palacePlaceStatus’).innerHTML = remaining>0
 ? `Volgende: <b id="palaceCurrentWordLabel">${PALACE_WORDS[this.placements.length].word}</b> ${PALACE_WORDS[this.placements.length].image}`
-: ‘✅ Alle woorden geplaatst! Ga naar Terugroepen.’;
+: ‘\u2705 Alle woorden geplaatst! Ga naar Terugroepen.’;
 },
 
 _initRecall(){
@@ -2451,7 +2436,7 @@ else if(b.textContent===chosen && !ok) b.classList.add(‘p-wrong’);
 b.style.pointerEvents=‘none’;
 });
 const fb=document.getElementById(‘palaceRecallFeedback’);
-fb.textContent=ok?‘✅ Goed onthouden!’:‘❌ Het was: ‘+correct;
+fb.textContent=ok?’\u2705 Goed onthouden!’:’\u274C Het was: ‘+correct;
 fb.style.color=ok?‘var(–primary)’:‘var(–red)’;
 const pct=Math.round((this.recallCorrect/Math.max(1,this.recallIdx+1))*100);
 const ring=document.getElementById(‘palaceScoreRing’);
@@ -2465,24 +2450,24 @@ _finishRecall(){
 const pct=Math.round((this.recallCorrect/this.recallQueue.length)*100);
 document.getElementById(‘palaceRecallFeedback’).textContent=`Sessie klaar! ${this.recallCorrect}/${this.recallQueue.length} correct (${pct}%)`;
 document.getElementById(‘palaceRecallFeedback’).style.color=‘var(–primary)’;
-document.getElementById(‘palaceRecallCount’).textContent=‘✅ Klaar’;
+document.getElementById(‘palaceRecallCount’).textContent=’\u2705 Klaar’;
 let s=getStats(); s.palace=(s.palace||0)+this.recallCorrect; saveStats(s);
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
-//  SPACED REPETITION — SM-2 algoritme (Ebbinghaus)
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+//  SPACED REPETITION \u2014 SM-2 algoritme (Ebbinghaus)
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const PRESET_CARDS = [
-{ front:‘Wat is een fixatie?’,          back:‘Een korte pauze van het oog op een woord of woordgroep tijdens het lezen (~0.25–1.5 seconde).’ },
+{ front:‘Wat is een fixatie?’,          back:‘Een korte pauze van het oog op een woord of woordgroep tijdens het lezen (~0.25\u20131.5 seconde).’ },
 { front:‘Wat is subvocalisatie?’,       back:‘Het innerlijk “uitspreken” van woorden tijdens het lezen. Begrenst snelheid tot spreektempo (~150 WPM).’ },
 { front:‘Wat is regressie?’,            back:‘Bewust terugkeren naar eerder gelezen tekst omdat je denkt iets te hebben gemist.’ },
-{ front:‘Wat is back-skipping?’,        back:‘Onbewust terugspringen van de ogen naar net gelezen woorden — een onbewuste gewoonte die vertraagt.’ },
+{ front:‘Wat is back-skipping?’,        back:‘Onbewust terugspringen van de ogen naar net gelezen woorden \u2014 een onbewuste gewoonte die vertraagt.’ },
 { front:‘Wat zegt de vergeetcurve?’,    back:‘Ebbinghaus (1885): zonder herhaling vergeet je 70% binnen 24 uur. Met spaced repetition onthoud je 90%+.’ },
 { front:‘Wat is perifeer zicht?’,       back:‘80% van je netvlies is perifeer. Expert-lezers gebruiken dit om meerdere woorden per fixatie te pakken.’ },
-{ front:‘Wat is de SM-2 formule?’,      back:‘Supermemo-algoritme: interval = interval × ease-factor. Makkelijke kaarten krijgen langere intervallen.’ },
+{ front:‘Wat is de SM-2 formule?’,      back:‘Supermemo-algoritme: interval = interval \u00D7 ease-factor. Makkelijke kaarten krijgen langere intervallen.’ },
 { front:‘Wat is chunking?’,             back:‘Het groeperen van informatie in betekenisvolle eenheden zodat het werkgeheugen minder belast wordt.’ },
-{ front:‘Wat is de Leitner box?’,       back:‘Fysiek spaced repetition systeem: correct → vakje omhoog (langer interval). Fout → terug naar vak 1.’ },
+{ front:‘Wat is de Leitner box?’,       back:‘Fysiek spaced repetition systeem: correct \u2192 vakje omhoog (langer interval). Fout \u2192 terug naar vak 1.’ },
 { front:‘Wat zegt Buzan over tempo?’,   back:‘Hersenen begrijpen beter bij 400+ WPM dan bij 100 WPM: meer context per fixatie verbetert begrip.’ },
 ];
 
@@ -2493,8 +2478,8 @@ sessionIdx: 0,
 sessionDone: 0,
 flipped: false,
 
-_load(){ try{ this.cards = JSON.parse(localStorage.getItem(‘sr_cards’)||’[]’); }catch(e){ this.cards=[]; } },
-_save(){ try{ localStorage.setItem(‘sr_cards’, JSON.stringify(this.cards)); }catch(e){} },
+_load(){ this.cards = JSON.parse(localStorage.getItem(‘sr_cards’)||’[]’); },
+_save(){ localStorage.setItem(‘sr_cards’, JSON.stringify(this.cards)); },
 
 addCard(){
 const f=document.getElementById(‘srFrontInput’).value.trim();
@@ -2524,7 +2509,7 @@ this._drawCurve();
 const now = Date.now();
 const due = this.cards.filter(c=>c.due<=now);
 const info = document.getElementById(‘srNextInfo’);
-info.innerHTML = ` <span class="sr-next-chip chip-due">📋 ${due.length} te herhalen</span> <span class="sr-next-chip chip-new">✨ ${this.cards.length} totaal</span> <span class="sr-next-chip">${this.cards.filter(c=>c.reps>0).length} geleerd</span>`;
+info.innerHTML = ` <span class="sr-next-chip chip-due">\uD83D\uDCCB ${due.length} te herhalen</span> <span class="sr-next-chip chip-new">\u2728 ${this.cards.length} totaal</span> <span class="sr-next-chip">${this.cards.filter(c=>c.reps>0).length} geleerd</span>`;
 // queue dots
 const bar = document.getElementById(‘srQueueBar’);
 const show = this.cards.slice(0,30);
@@ -2646,7 +2631,7 @@ ctx.fillStyle=’#060a06’; ctx.fillRect(0,0,W,H);
 // Draw multiple curves for different repetition stages
 const stabilities=[0.3,1,3,7,21]; // days
 const colors=[’#ff4444’,’#ff8800’,’#ffcc00’,’#44ff88’,’#00ffcc’];
-const labels=[‘Geen herhaling’,‘1×’,‘2×’,‘3×’,‘4× herhaald’];
+const labels=[‘Geen herhaling’,‘1\u00D7’,‘2\u00D7’,‘3\u00D7’,‘4\u00D7 herhaald’];
 stabilities.forEach((S,si)=>{
 ctx.beginPath();
 for(let px=0;px<W;px++){
@@ -2669,13 +2654,13 @@ ctx.setLineDash([]);
 ctx.font=‘9px Segoe UI’; ctx.textAlign=‘right’;
 labels.forEach((l,i)=>{ ctx.fillStyle=colors[i]; ctx.fillText(l,W-4,H-(i*14)-6); });
 ctx.fillStyle=’#444’; ctx.textAlign=‘left’; ctx.font=‘9px Segoe UI’;
-ctx.fillText(‘nu’,2,H-4); ctx.fillText(‘30 dagen →’,W*0.85,H-4);
+ctx.fillText(‘nu’,2,H-4); ctx.fillText(‘30 dagen \u2192’,W*0.85,H-4);
 }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  RSVP
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 const RSVP = {
 wpm: 350, timer: null,
 updateWPM(){ this.wpm=parseInt(document.getElementById(‘rsvpWPM’).value); document.getElementById(‘rsvpWPMLabel’).textContent=this.wpm+’ WPM’; },
@@ -2691,9 +2676,9 @@ document.getElementById(‘rsvpBox’).textContent=words[i++];
 stop(){ clearInterval(this.timer); document.getElementById(‘rsvpBox’).textContent=’—’; }
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 //  INIT
-// ═══════════════════════════════════════════════════════════════════
+// \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 App.renderBuzanText();
 Metro.updatePhaseUI();
 Scan.start();
@@ -2734,5 +2719,6 @@ document.getElementById(‘periInput’).addEventListener(‘keydown’, e=>{ if
 OB.init();
 
 </script>
+
 </body>
 </html>
