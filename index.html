@@ -1165,6 +1165,14 @@ box-shadow:0 4px 24px #00ffcc22;
 </div><!-- /container -->
 <script>
 
+// Global error handler for debugging
+window.addEventListener(‘error’, function(e){
+console.error(‘App error:’, e.message, ‘at’, e.filename, ‘line’, e.lineno);
+});
+window.addEventListener(‘unhandledrejection’, function(e){
+console.error(‘Unhandled promise rejection:’, e.reason);
+});
+
 //  DATA
 // ═══════════════════════════════════════════════════════════════════
 const DEFAULT_TEXT = `Speed reading helpt je om informatie sneller te verwerken door je visuele spanwijdte te vergroten. Tony Buzan ontwikkelde technieken waarbij je de ogen traint als een camera die in één oogopslag een heel zinsdeel vastlegt. Door regelmatige oefening leer je subvocalisatie te verminderen en je blikveld te verbreden. Het resultaat is een hogere leessnelheid met behoud van begrip en concentratie. De hersenen zijn relativistische organen die zich aanpassen aan nieuwe normen. Wanneer je jezelf dwingt sneller te lezen, past je brein zich aan en maakt het tempo na verloop van tijd normaal. Dit is het principe achter de metronoom-trainingsmethode die Buzan beschrijft in zijn boek The Speed Reading Book.`;
@@ -1228,8 +1236,15 @@ function safeSetInterval(fn, ms){ let id = setInterval(fn,ms); _intervals.push(i
 function safeSetTimeout(fn, ms){ let id = setTimeout(fn,ms); _timeouts.push(id); return id; }
 function clearAll(){ _intervals.forEach(clearInterval); _timeouts.forEach(clearTimeout); _intervals=[]; _timeouts=[]; }
 
-function getStats(){ return JSON.parse(localStorage.getItem(‘bsr_v5’)||’{“wpm”:[],“num”:0,“scan”:0,“peri”:0,“vocab”:0,“palace”:0,“onboardDone”:false,“userLevel”:1,“startWPM”:150,“metroSessions”:0,“eyeSessions”:0}’); }
-function saveStats(s){ localStorage.setItem(‘bsr_v5’, JSON.stringify(s)); updateStatsUI(); }
+function getStats(){
+const EMPTY=’{“wpm”:[],“num”:0,“scan”:0,“peri”:0,“vocab”:0,“palace”:0,“onboardDone”:false,“userLevel”:1,“startWPM”:150,“metroSessions”:0,“eyeSessions”:0}’;
+try{ return JSON.parse(localStorage.getItem(‘bsr_v5’)||EMPTY); }
+catch(e){ return JSON.parse(EMPTY); }
+}
+function saveStats(s){
+try{ localStorage.setItem(‘bsr_v5’, JSON.stringify(s)); } catch(e){}
+updateStatsUI();
+}
 function addWPM(wpm){ let s=getStats(); s.wpm.push(wpm); saveStats(s); Guide.checkMilestones(); }
 
 function updateStatsUI(){
@@ -1401,7 +1416,7 @@ document.getElementById('dashWPMTarget').textContent=avgWPM<(lvl?.target||300)?`
 
 // Today tasks
 const todayKey='tasks_'+new Date().toDateString();
-const doneTasks=JSON.parse(localStorage.getItem(todayKey)||'[]');
+const doneTasks=(()=>{ try{ return JSON.parse(localStorage.getItem(todayKey)||'[]'); }catch(e){ return []; } })();
 const grid=document.getElementById('todayGrid');
 grid.innerHTML=DAILY_TASKS.map(t=>`
   <div class="today-card${doneTasks.includes(t.key)?' today-done':''}" onclick="showSection('${t.section}');Guide.markTask('${t.key}')">
@@ -1438,7 +1453,7 @@ steps.innerHTML=LEARNING_PATH.map(step=>{
 markTask(key){
 const todayKey=‘tasks_’+new Date().toDateString();
 const done=JSON.parse(localStorage.getItem(todayKey)||’[]’);
-if(!done.includes(key)){ done.push(key); localStorage.setItem(todayKey,JSON.stringify(done)); }
+if(!done.includes(key)){ done.push(key); try{ localStorage.setItem(todayKey,JSON.stringify(done)); }catch(e){} }
 },
 
 applyGates(){
@@ -1467,12 +1482,12 @@ const milestones=[
 { wpm:700, msg:‘🏆 700 WPM! Je bent een expert-lezer.’ },
 ];
 const best=s.wpm.length?Math.max(…s.wpm):0;
-const shown=JSON.parse(localStorage.getItem(‘milestones_shown’)||’[]’);
+const shown=(()=>{ try{ return JSON.parse(localStorage.getItem(‘milestones_shown’)||’[]’); }catch(e){ return []; } })();
 milestones.forEach(m=>{
 if(best>=m.wpm&&!shown.includes(m.wpm)){
 showToast(m.msg);
 shown.push(m.wpm);
-localStorage.setItem(‘milestones_shown’,JSON.stringify(shown));
+try{ localStorage.setItem(‘milestones_shown’,JSON.stringify(shown)); }catch(e){}
 }
 });
 this.applyGates();
@@ -1481,7 +1496,7 @@ this.applyGates();
 resetOnboarding(){
 if(confirm(‘Herdoe de nulmeting? Je statistieken blijven bewaard.’)){
 const s=getStats(); s.onboardDone=false; saveStats(s);
-localStorage.removeItem(‘milestones_shown’);
+try{ localStorage.removeItem(‘milestones_shown’); }catch(e){}
 location.reload();
 }
 }
@@ -1701,7 +1716,7 @@ document.querySelectorAll(’#buzanTextDisplay .word’).forEach(el=>el.classLis
 },
 clearStats(){
 if(confirm(‘Weet je zeker dat je alle statistieken wilt verwijderen?’)){
-localStorage.removeItem(‘bsr_v5’);
+try{ localStorage.removeItem(‘bsr_v5’); }catch(e){}
 localStorage.removeItem(‘milestones_shown’);
 updateStatsUI();
 Guide.buildDashboard();
@@ -2478,8 +2493,8 @@ sessionIdx: 0,
 sessionDone: 0,
 flipped: false,
 
-_load(){ this.cards = JSON.parse(localStorage.getItem(‘sr_cards’)||’[]’); },
-_save(){ localStorage.setItem(‘sr_cards’, JSON.stringify(this.cards)); },
+_load(){ try{ this.cards = JSON.parse(localStorage.getItem(‘sr_cards’)||’[]’); }catch(e){ this.cards=[]; } },
+_save(){ try{ localStorage.setItem(‘sr_cards’, JSON.stringify(this.cards)); }catch(e){} },
 
 addCard(){
 const f=document.getElementById(‘srFrontInput’).value.trim();
